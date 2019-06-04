@@ -13,25 +13,26 @@
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
-  <link rel="stylesheet" href="../../css/highlight.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
   <link href="../../extra.css" rel="stylesheet">
   
   <script>
     // Current page data
     var mkdocs_page_name = "Build a car.";
     var mkdocs_page_input_path = "guide/build_hardware.md";
-    var mkdocs_page_url = "/guide/build_hardware/";
+    var mkdocs_page_url = null;
   </script>
   
-  <script src="../../js/jquery-2.1.1.min.js"></script>
-  <script src="../../js/modernizr-2.8.3.min.js"></script>
-  <script type="text/javascript" src="../../js/highlight.pack.js"></script> 
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
   
   <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
       ga('create', 'UA-99215530-2', 'github.io/donkey');
       ga('send', 'pageview');
@@ -49,7 +50,7 @@
         <a href="../.." class="icon icon-home"> Donkey Car</a>
         <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
   </form>
 </div>
       </div>
@@ -258,17 +259,17 @@
 LaTrax Prerunner <a href="https://www.amazon.com/Traxxas-LaTrax-Electric-Prerunner-Control/dp/B07B3PQTRD">link</a></p>
 <p>here is a <a href="https://youtu.be/UucnCmCAGTI">video</a> overview of the different cars and how to assemble them.</p>
 <p>In addition there are 3 more cars supported under the "Donkey Pro" name.  These are 1/10 scale cars which means that they are bigger, perform a little better and are slightly more expensive.  They can be found here:
-<em>  HobbyKing Trooper (not pro version) <a href="https://hobbyking.com/en_us/turnigy-trooper-sct-4x4-1-10-brushless-short-course-truck-arr.html?affiliate_code=XFPFGDFDZOPWEHF&amp;_asc=9928905034">found here</a>
-</em>  HobbyKing Mission-D <a href="https://hobbyking.com/en_us/1-10-hobbykingr-mission-d-4wd-gtr-drift-car-arr.html?affiliate_code=XFPFGDFDZOPWEHF&amp;_asc=337569952">found here</a>
+*  HobbyKing Trooper (not pro version) <a href="https://hobbyking.com/en_us/turnigy-trooper-sct-4x4-1-10-brushless-short-course-truck-arr.html?affiliate_code=XFPFGDFDZOPWEHF&amp;_asc=9928905034">found here</a>
+*  HobbyKing Mission-D <a href="https://hobbyking.com/en_us/1-10-hobbykingr-mission-d-4wd-gtr-drift-car-arr.html?affiliate_code=XFPFGDFDZOPWEHF&amp;_asc=337569952">found here</a>
 *  Tamaya TT01 or Clone - found worldwide but usually has to be built as a kits.  The other two cars are ready to be donkified, this one, however is harder to assemble.  </p>
 <p>Here is a <a href="https://youtu.be/K-REL9aqPE0">video</a> that goes over the different models.  The Donkey Pro models are not yet very well documented, just a word of warning.  </p>
-<p>For more detail and other options, follow the link to: <a href="../../supported_cars/">supported cars</a></p>
+<p>For more detail and other options, follow the link to: <a href="/supported_cars.md">supported cars</a></p>
 <p><img alt="donkey" src="../../assets/build_hardware/donkey.PNG" /></p>
 <h2 id="classic-donkey-car">Classic Donkey Car.</h2>
 <p>We had an old design before which is no longer maintained... it can be found <a href="/legacy.md">here</a></p>
 <p>&nbsp;</p>
 <h2 id="roll-your-own-car">Roll Your Own Car</h2>
-<p>Alternatively If you know RC or need something the standard Donkey does not support, you can roll your own.  Here is a quick reference to help you along the way.  <a href="../../roll_your_own/">Roll Your Own</a></p>
+<p>Alternatively If you know RC or need something the standard Donkey does not support, you can roll your own.  Here is a quick reference to help you along the way.  <a href="/roll_your_own.md">Roll Your Own</a></p>
 <h2 id="parts-needed">Parts Needed:</h2>
 <h3 id="option-1-buying-through-an-official-donkey-store">Option 1: Buying through an official Donkey Store</h3>
 <p>There are two official stores:</p>
@@ -442,7 +443,7 @@ LaTrax Prerunner <a href="https://www.amazon.com/Traxxas-LaTrax-Electric-Prerunn
 <p>&nbsp;</p>
 <h3 id="step-6-attach-camera">Step 6: Attach Camera</h3>
 <p>Slip the camera into the slot, cable end first.  However, be careful not to push on the camera lens and instead press the board.
-![donkey](../assets/build_hardware/assemble camera.jpg)</p>
+<img alt="donkey" src="../../assets/build_hardware/assemble camera.jpg" /></p>
 <p>If you need to remove the camera the temptation is to push on the lens, instead push on the connector as is shown in these pictures.<br />
 <img alt="donkey" src="../../assets/build_hardware/Remove--good.jpg" /> <img alt="donkey" src="../../assets/build_hardware/Remove--bad.jpg" /></p>
 <p>Before using the car, remove the plastic film or lens cover from the camera lens.</p>
@@ -514,9 +515,8 @@ The final steps are straightforward.  First attach the roll bar assembly to the 
     </span>
 </div>
     <script>var base_url = '../..';</script>
-    <script src="../../js/theme.js"></script>
-      <script src="../../search/require.js"></script>
-      <script src="../../search/search.js"></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
 
 </body>
 </html>
