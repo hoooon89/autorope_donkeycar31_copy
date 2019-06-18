@@ -68,7 +68,7 @@
     
         <ul>
         
-            <li><a class="toctree-l3" href="#build-your-own-donkey2">Build your own Donkey2</a></li>
+            <li><a class="toctree-l3" href="#build-your-own-donkey">Build your own Donkey</a></li>
         
             <li><a class="toctree-l3" href="#hello-world">Hello World.</a></li>
         
@@ -96,11 +96,15 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="guide/get_driving/">Get driving.</a>
+    <a class="" href="guide/create_application/">Create Donkeycar App.</a>
                 </li>
                 <li class="">
                     
     <a class="" href="guide/calibrate/">Calibrate steering and throttle.</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="guide/get_driving/">Get driving.</a>
                 </li>
                 <li class="">
                     
@@ -220,11 +224,12 @@
 <p>Donkey is a high level self driving library written in Python. It was
 developed with a focus on enabling fast experimentation and easy contribution.</p>
 <hr />
-<h3 id="build-your-own-donkey2">Build your own Donkey2</h3>
-<p>Donkey2 is the standard car that most people build first. The parts cost about $250 to $300 and take 2 hours to assemble. Here are the main steps to build your own car:</p>
+<h3 id="build-your-own-donkey">Build your own Donkey</h3>
+<p>Donkey is the standard car that most people build first. The parts cost about $250 to $300 and take 2 hours to assemble. Here are the main steps to build your own car:</p>
 <ol>
 <li><a href="guide/build_hardware/">Assemble hardware.</a></li>
 <li><a href="guide/install_software/">Install software.</a></li>
+<li><a href="guide/create_application/">Create Donkey App.</a></li>
 <li><a href="guide/calibrate/">Calibrate your car.</a></li>
 <li><a href="guide/get_driving/">Start driving.</a></li>
 <li><a href="guide/train_autopilot/">Train an autopilot.</a></li>
@@ -244,7 +249,7 @@ cam = dk.parts.PiCamera()
 V.add(cam, outputs=['image'], threaded=True)
 
 #add tub part to record images
-tub = dk.parts.Tub(path='~/mycar/gettings_started',
+tub = dk.parts.Tub(path='~/mycar/data',
                    inputs=['image'],
                    types=['image_array'])
 V.add(tub, inputs=inputs)
@@ -255,12 +260,7 @@ V.start(max_loop_count=100)
 
 <hr />
 <h3 id="installation">Installation</h3>
-<p>For linux/OS users clone the master branch to get the latest version.</p>
-<pre><code class="bash">git clone https://github.com/autorope/donkeycar
-pip install -e ./donkeycar
-</code></pre>
-
-<p><a href="guide/install_software/">How to install on Windows</a></p>
+<p><a href="guide/install_software/">How to install</a></p>
 <hr />
 <h3 id="why-the-name-donkey">Why the name Donkey?</h3>
 <p>The ultimate goal of this project is to build something useful. Donkey's were
@@ -317,5 +317,5 @@ other, we'll hold off naming it after some celestial being.</p>
 
 <!--
 MkDocs version : 1.0.4
-Build Date UTC : 2019-06-04 23:01:24
+Build Date UTC : 2019-06-18 03:40:49
 -->

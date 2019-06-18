@@ -78,7 +78,7 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../get_driving/">Get driving.</a>
+    <a class="" href="../create_application/">Create Donkeycar App.</a>
                 </li>
                 <li class=" current">
                     
@@ -101,6 +101,10 @@
     
 
     </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../get_driving/">Get driving.</a>
                 </li>
                 <li class="">
                     
@@ -221,21 +225,17 @@
             <div class="section">
               
                 <h1 id="calibrate-your-car">Calibrate your Car</h1>
-<p>The point of calibrating your car is to make it drive consitently with
-other vehicles. These instructions</p>
+<p>The point of calibrating your car is to make it drive consitently.</p>
 <h2 id="how-to-adjust-your-cars-settings">How to adjust your car's settings.</h2>
-<p>All of the car's settings are in the <code>config.py</code> script generated when
-you ran the <code>donkey createcar --path ~/mycar</code> command. You can edit
-this file on your car by running:</p>
-<pre><code class="bash">nano ~/mycar/config.py
-</code></pre>
-
-<p>Our goal is to edit these settings so your car will drive like every
-other calibrated Donkey2. This way you'll be able to share pilots and
-datasets between each car.</p>
 <blockquote>
 <p>You will need to ssh into your Pi to do the calibration.</p>
 </blockquote>
+<p>All of the car's settings are in the <code>config.py</code> and <code>myconfig.py</code> scripts generated when
+you ran the <code>donkey createcar --path ~/mycar</code> command. You can edit
+this file on your car by running:</p>
+<pre><code class="bash">nano ~/mycar/myconfig.py
+</code></pre>
+
 <h2 id="steering-calibration">Steering Calibration</h2>
 <blockquote>
 <p>Make sure your car is off the ground to prevent a runaway situation.</p>
@@ -244,20 +244,20 @@ datasets between each car.</p>
 <li>Turn on your car.</li>
 <li>Find the servo cable on your car and see what channel it's plugged into the
 PCA board. It should be 1 or 0.</li>
-<li>Run <code>donkey calibrate --channel &lt;your_steering_channel&gt;</code></li>
+<li>Run <code>donkey calibrate --channel &lt;your_steering_channel&gt; --bus=1</code></li>
 <li>Enter <code>360</code> and you should see the wheels on your car move slightly. If not
 enter <code>400</code> or <code>300</code>.</li>
 <li>Next enter values +/- 10 from your starting value to find the PWM setting
 that makes your car turn all the way left and all the way right. Remember
 these values.</li>
-<li>Enter these values in <code>config.py</code> script as <code>STEERING_RIGHT_PWM</code> and
+<li>Enter these values in <code>myconfig.py</code> script as <code>STEERING_RIGHT_PWM</code> and
 <code>STEERING_LEFT_PWM</code>.</li>
 </ol>
 <h2 id="throttle-calibration">Throttle Calibration</h2>
 <ol>
 <li>Find the cable coming from your ESC and see what channel it goes into the
 PCA board. This is your throttle channel.</li>
-<li>run <code>donkey calibrate --channel &lt;your_throttle_channel&gt;</code></li>
+<li>run <code>donkey calibrate --channel &lt;your_throttle_channel&gt; --bus=1</code></li>
 <li>Enter <code>370</code> when prompted for a PWM value.</li>
 <li>You should hear your ESC beep indicating that it's calibrated.</li>
 <li>Enter <code>400</code> and you should see your cars wheels start to go forward. If not,
@@ -275,7 +275,7 @@ value again.</li>
 <li>Enter values +/- 10 of the reverse value to find a reasonable reverse speed.
 Remember this reverse PWM value.</li>
 </ol>
-<p>Now open your <code>config.py</code> script and enter the PWM values for your car into
+<p>Now open your <code>myconfig.py</code> script and enter the PWM values for your car into
 the throttle_controller part:</p>
 <ul>
 <li><code>THROTTLE_FORWARD_PWM</code> = PWM value for full throttle forward</li>
@@ -283,6 +283,9 @@ the throttle_controller part:</p>
 <li><code>THROTTLE_REVERSE_PWM</code> = PWM value at full reverse throttle</li>
 </ul>
 <h2 id="fine-tuning-your-calibration">Fine tuning your calibration.</h2>
+<blockquote>
+<p>Note : optional</p>
+</blockquote>
 <p><img alt="fine calibration" src="../../assets/fine_calibration.gif" /></p>
 <p>Now that you have your car roughly calibrated you can try driving it to
 verify that it drives as expected. Here's how to fine tune your car's calibration.</p>
@@ -304,6 +307,7 @@ in the opposite direction of the bias.</p>
 <p>After you've fine tuned your car the steering chart should look something like
 this.</p>
 <p><img alt="calibration graph" src="../../assets/calibration_graph.png" /></p>
+<h3 id="next-lets-get-driving">Next let's <a href="/guide/get_driving/">get driving!</a></h3>
               
             </div>
           </div>
@@ -311,10 +315,10 @@ this.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../train_autopilot/" class="btn btn-neutral float-right" title="Train an autopilot.">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../get_driving/" class="btn btn-neutral float-right" title="Get driving.">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../get_driving/" class="btn btn-neutral" title="Get driving."><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../create_application/" class="btn btn-neutral" title="Create Donkeycar App."><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -342,10 +346,10 @@ this.</p>
           <a href="https://github.com/autorope/donkeycar/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../get_driving/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../create_application/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../train_autopilot/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../get_driving/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

@@ -73,7 +73,7 @@
     <a class="current" href="./">Build a car.</a>
     <ul class="subnav">
             
-    <li class="toctree-l3"><a href="#how-to-build-a-donkey-v2">How to Build a Donkey&reg; V2</a></li>
+    <li class="toctree-l3"><a href="#how-to-build-a-donkey">How to Build a Donkey&reg;</a></li>
     
         <ul>
         
@@ -81,9 +81,9 @@
         
             <li><a class="toctree-l4" href="#choosing-a-car">Choosing a Car</a></li>
         
-            <li><a class="toctree-l4" href="#classic-donkey-car">Classic Donkey Car.</a></li>
-        
             <li><a class="toctree-l4" href="#roll-your-own-car">Roll Your Own Car</a></li>
+        
+            <li><a class="toctree-l4" href="#video-overview-of-hardware-assembly">Video Overview of Hardware Assembly</a></li>
         
             <li><a class="toctree-l4" href="#parts-needed">Parts Needed:</a></li>
         
@@ -102,11 +102,15 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../get_driving/">Get driving.</a>
+    <a class="" href="../create_application/">Create Donkeycar App.</a>
                 </li>
                 <li class="">
                     
     <a class="" href="../calibrate/">Calibrate steering and throttle.</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../get_driving/">Get driving.</a>
                 </li>
                 <li class="">
                     
@@ -226,7 +230,7 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="how-to-build-a-donkey-v2">How to Build a Donkey&reg; V2</h1>
+                <h1 id="how-to-build-a-donkey">How to Build a Donkey&reg;</h1>
 <p>&nbsp;</p>
 <ul>
 <li><a href="./#overview">Overview</a></li>
@@ -265,11 +269,12 @@ LaTrax Prerunner <a href="https://www.amazon.com/Traxxas-LaTrax-Electric-Prerunn
 <p>Here is a <a href="https://youtu.be/K-REL9aqPE0">video</a> that goes over the different models.  The Donkey Pro models are not yet very well documented, just a word of warning.  </p>
 <p>For more detail and other options, follow the link to: <a href="/supported_cars.md">supported cars</a></p>
 <p><img alt="donkey" src="../../assets/build_hardware/donkey.PNG" /></p>
-<h2 id="classic-donkey-car">Classic Donkey Car.</h2>
-<p>We had an old design before which is no longer maintained... it can be found <a href="/legacy.md">here</a></p>
 <p>&nbsp;</p>
 <h2 id="roll-your-own-car">Roll Your Own Car</h2>
 <p>Alternatively If you know RC or need something the standard Donkey does not support, you can roll your own.  Here is a quick reference to help you along the way.  <a href="/roll_your_own.md">Roll Your Own</a></p>
+<h2 id="video-overview-of-hardware-assembly">Video Overview of Hardware Assembly</h2>
+<p>This <a href="https://www.youtube.com/watch?v=OaVqWiR2rS0&amp;t=48s">video</a> covers how to assemble a standard Donkey Car, it also covers the Sombrero, the Raspberry Pi and the nVidia Jetson Nano.  </p>
+<p><a href="https://www.youtube.com/watch?v=OaVqWiR2rS0&amp;t=48s"><img alt="IMAGE ALT TEXT HERE" src="../../assets/HW_Video.png" /></a></p>
 <h2 id="parts-needed">Parts Needed:</h2>
 <h3 id="option-1-buying-through-an-official-donkey-store">Option 1: Buying through an official Donkey Store</h3>
 <p>There are two official stores:</p>
@@ -300,7 +305,7 @@ LaTrax Prerunner <a href="https://www.amazon.com/Traxxas-LaTrax-Electric-Prerunn
 <td>$38</td>
 </tr>
 <tr>
-<td>MicroSD Card (many will work, I like this one because it boots quickly)</td>
+<td>MicroSD Card (many will work, we strongly recommend this one)</td>
 <td><a href="https://www.amazon.com/gp/product/B01HU3Q6F2?tag=donkeycar-20">amazon.com/gp/product/B01HU3Q6F2</a></td>
 <td>$18.99</td>
 </tr>
@@ -428,6 +433,7 @@ LaTrax Prerunner <a href="https://www.amazon.com/Traxxas-LaTrax-Electric-Prerunn
 <h3 id="step-3-assemble-top-plate-and-roll-cage">Step 3: Assemble Top plate and Roll Cage</h3>
 <p>If you have an Exceed Short Course Truck, Blaze or Desert Monster watch this <a href="https://youtu.be/UucnCmCAGTI">video</a></p>
 <p>This is a relatively simple assembly step.   Just use the 3mm self tapping screws to scew the plate to the roll cage.  </p>
+<p>When attaching the roll cage to the top plate, ensure that the nubs on the top plate face the roll-cage. This will ensure the equipment you mount to the top plate fits easily.</p>
 <p>&nbsp;</p>
 <h3 id="step-4-connect-servo-shield-to-raspberry-pi">Step 4: Connect Servo Shield to Raspberry Pi.</h3>
 <p><strong><em>note: this is not necessary if you have a Sombrero, the Sombrero just plugs into the Pi</em></strong></p>
@@ -443,7 +449,7 @@ LaTrax Prerunner <a href="https://www.amazon.com/Traxxas-LaTrax-Electric-Prerunn
 <p>&nbsp;</p>
 <h3 id="step-6-attach-camera">Step 6: Attach Camera</h3>
 <p>Slip the camera into the slot, cable end first.  However, be careful not to push on the camera lens and instead press the board.
-<img alt="donkey" src="../../assets/build_hardware/assemble camera.jpg" /></p>
+<img alt="donkey" src="../../assets/build_hardware/assemble_camera.jpg" /></p>
 <p>If you need to remove the camera the temptation is to push on the lens, instead push on the connector as is shown in these pictures.<br />
 <img alt="donkey" src="../../assets/build_hardware/Remove--good.jpg" /> <img alt="donkey" src="../../assets/build_hardware/Remove--bad.jpg" /></p>
 <p>Before using the car, remove the plastic film or lens cover from the camera lens.</p>

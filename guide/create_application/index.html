@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>Get driving. - Donkey Car</title>
+  <title>Create Donkeycar App. - Donkey Car</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -18,8 +18,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Get driving.";
-    var mkdocs_page_input_path = "guide/get_driving.md";
+    var mkdocs_page_name = "Create Donkeycar App.";
+    var mkdocs_page_input_path = "guide/create_application.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -76,46 +76,39 @@
                     
     <a class="" href="../install_software/">Install the software.</a>
                 </li>
-                <li class="">
-                    
-    <a class="" href="../create_application/">Create Donkeycar App.</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../calibrate/">Calibrate steering and throttle.</a>
-                </li>
                 <li class=" current">
                     
-    <a class="current" href="./">Get driving.</a>
+    <a class="current" href="./">Create Donkeycar App.</a>
     <ul class="subnav">
             
-    <li class="toctree-l3"><a href="#drive-your-car">Drive your car.</a></li>
+    <li class="toctree-l3"><a href="#create-your-car-application">Create your car application.</a></li>
     
         <ul>
         
-            <li><a class="toctree-l4" href="#start-your-car">Start your car.</a></li>
+            <li><a class="toctree-l4" href="#create-donkeycar-from-template">Create Donkeycar from Template</a></li>
         
-            <li><a class="toctree-l4" href="#driving-with-web-controller">Driving with Web Controller</a></li>
+            <li><a class="toctree-l4" href="#updating">Updating</a></li>
         
-        </ul>
-    
-
-    <li class="toctree-l3"><a href="#driving-with-physical-joystick-controller">Driving with Physical Joystick Controller</a></li>
-    
-        <ul>
+            <li><a class="toctree-l4" href="#configure-options">Configure Options</a></li>
         
-            <li><a class="toctree-l4" href="#setup-bluetooth-and-pair-joystick">Setup Bluetooth and pair joystick</a></li>
+            <li><a class="toctree-l4" href="#joystick-setup">Joystick setup</a></li>
         
-            <li><a class="toctree-l4" href="#start-car">Start car</a></li>
+            <li><a class="toctree-l4" href="#camera-setup">Camera Setup</a></li>
         
-            <li><a class="toctree-l4" href="#joystick-controls">Joystick Controls</a></li>
-        
-            <li><a class="toctree-l4" href="#next-lets-train-an-autopilot_1">Next let's train an autopilot.</a></li>
+            <li><a class="toctree-l4" href="#troubleshooting">Troubleshooting</a></li>
         
         </ul>
     
 
     </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../calibrate/">Calibrate steering and throttle.</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../get_driving/">Get driving.</a>
                 </li>
                 <li class="">
                     
@@ -222,10 +215,10 @@
         
       
     
-    <li>Get driving.</li>
+    <li>Create Donkeycar App.</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="https://github.com/autorope/donkeycar/edit/master/docs/guide/get_driving.md"
+        <a href="https://github.com/autorope/donkeycar/edit/master/docs/guide/create_application.md"
           class="icon icon-github"> Edit on GitHub</a>
       
     </li>
@@ -235,81 +228,78 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="drive-your-car">Drive your car.</h1>
-<p>After you've <a href="/guide/calibrate">calibrated</a> your car you can start driving it. </p>
+                <h1 id="create-your-car-application">Create your car application.</h1>
 <p>If you are not already, please <a href="/guide/robot_sbc/setup_raspberry_pi/#step-5-connecting-to-the-pi">ssh into your vehicle</a>.</p>
-<h3 id="start-your-car">Start your car.</h3>
-<blockquote>
-<p><strong><em> Put your car in a safe place where the wheels are off the ground </em></strong>. This
-is the step were the car can take off. </p>
-</blockquote>
-<p>Open your car's folder and start your car. </p>
-<pre><code>cd ~/mycar
-python manage.py drive
+<h2 id="create-donkeycar-from-template">Create Donkeycar from Template</h2>
+<p>Create a set of files to control your Donkey with this command:</p>
+<pre><code>donkey createcar --path ~/mycar
 </code></pre>
 
-<p>This script will start the drive loop in your car which includes a part that 
-is a web server for you to control your car. You can now control your car
-from a web browser at the URL: <code>&lt;your car's IP's address&gt;:8887</code></p>
-<p><img alt="drive UI" src="../../assets/drive_UI.png" /></p>
-<h2 id="driving-with-web-controller">Driving with Web Controller</h2>
-<p>On your phone you can now press start to set your phones current tilt to be
-zero throttle and steering. Now tilting your phone forward will increase throttle and tilting it side to side will turn the steering. </p>
-<h3 id="features">Features</h3>
-<ul>
-<li>Recording - Press record data to start recording images, steering angels and throttle values. </li>
-<li>Throttle mode - Option to set the throttle as constant. This is used in 
-races if you have a pilot that will steer but doesn't control throttle. </li>
-<li>Pilot mode - Choose this if the pilot should control the angle and/or throttle.</li>
-<li>Max throttle - Select the maximum throttle.</li>
-</ul>
-<h3 id="keyboard-shortcuts">Keyboard shortcuts</h3>
-<ul>
-<li><code>space</code> : stop car and stop recording</li>
-<li><code>r</code> : toggle recording</li>
-<li><code>i</code> : increase throttle</li>
-<li><code>k</code> : decrease throttle</li>
-<li><code>j</code> : turn left </li>
-<li><code>l</code> : turn right </li>
-</ul>
-<hr />
-<h3 id="next-lets-train-an-autopilot">Next let's <a href="/guide/train_autopilot/">train an autopilot</a>.</h3>
-<hr />
-<h1 id="driving-with-physical-joystick-controller">Driving with Physical Joystick Controller</h1>
-<p>You may find that it helps to use a physical joystick device to control your vehicle.</p>
-<h3 id="setup-bluetooth-and-pair-joystick">Setup Bluetooth and pair joystick</h3>
-<p>Check the <a href="/parts/controllers/#physical-joystick-controller">Controllers</a> section to read about setting up the bluetooth connection.</p>
-<h3 id="start-car">Start car</h3>
-<pre><code>cd ~/mycar
-python manage.py drive --js
+<p>See also more information on <a href="/utility/donkey/#create-car">createcar.</a></p>
+<h2 id="updating">Updating</h2>
+<p>Make all config changes to <strong>myconfig.py</strong> and they will be preserved through an update. If you are a long time user, you might be used to editing config.py. You should switch to editing myconfig.py instead. Later on, when changes occur that you would like to get, you can pull latest code, then issue a:</p>
+<pre><code>donkey createcar --path ~/mycar --overwrite
 </code></pre>
 
-<p>Optionally, if you want joystick use to be sticky and don't want to add the --js each time, modify your <strong>myconfig.py</strong> so that <strong>USE_JOYSTICK_AS_DEFAULT = True</strong></p>
+<p>Your ~/mycar/manage.py, ~/mycar/config.py and other files will change with this operation. But <strong>myconfig.py</strong> will not be touched.</p>
+<h2 id="configure-options">Configure Options</h2>
+<p>Look at <strong>myconfig.py</strong></p>
 <pre><code>nano myconfig.py
 </code></pre>
 
-<h3 id="joystick-controls">Joystick Controls</h3>
-<ul>
-<li>Left analog stick - Left and right to adjust steering</li>
-<li>Right analog stick - Forward to increase forward throttle</li>
-<li>Pull back twice on right analog to reverse</li>
-</ul>
+<p>Each line has a comment mark. The commented text shows the default value. When you want to make an edit to over-write the default, uncomment the line by removing the # and any spaces before the first charater of the option.</p>
+<p>ie.</p>
+<p><code># STEERING_LEFT_PWM = 460</code></p>
+<p>becomes</p>
+<p><code>STEERING_LEFT_PWM = 500</code></p>
+<p>when edited. You will adjust these later in the <a href="/guide/calibrate/">calibrate</a> section.</p>
+<h3 id="configure-i2c-pca9685">Configure I2C PCA9685</h3>
+<p>If you are using a PCA9685 card, make sure you can see it on I2C.  Replace <username> with your Linux username.</p>
+<p>Jetson Nano:</p>
+<pre><code class="bash">sudo usermod -aG i2c &lt;username&gt;
+sudo reboot
+</code></pre>
+
+<p>After a reboot, then try:</p>
+<pre><code>sudo i2cdetect -r -y 1
+</code></pre>
+
+<p>Raspberry Pi:</p>
+<pre><code>sudo apt-get install i2c-tools
+sudo i2cdetect -y 1
+</code></pre>
+
+<p>This should show you a grid of addresses like:</p>
+<pre><code>     0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
+00:          -- -- -- -- -- -- -- -- -- -- -- -- --
+10: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+20: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+40: 40 -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+50: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+70: 70 -- -- -- -- -- -- --
+</code></pre>
+
+<p>In this case, the 40 shows up as the address of our PCA9685 board. If this does not show up, then check your wiring to the board. On a pi, ensure I2C is enabled in <code>sudo raspi-config</code></p>
+<p>If you have assigned a non-standard address to your board, then adjust the address in the myconfig.py <code>PCA9685_I2C_ADDR</code>. If your board is on another bus, then you can specify that with the <code>PCA9685_I2C_BUSNUM</code>.</p>
 <blockquote>
-<p>Whenever the throttle is not zero, driving data will be recorded - as long as you are in User mode!</p>
+<p>Jetson Nano: set <code>PCA9685_I2C_BUSNUM = 1</code> in your <strong>myconfig.py</strong> . For the pi, this will be auto detected by the Adafruit library. But not on the Jetson Nano.</p>
 </blockquote>
-<ul>
-<li>Select button switches modes - "User, Local Angle, Local(angle and throttle)"</li>
-<li>Triangle - Increase max throttle</li>
-<li>X  - Decrease max throttle</li>
-<li>Circle - Toggle recording (disabled by default. auto record on throttle is enabled by default)</li>
-<li>dpad up - Increase throttle scale</li>
-<li>dpad down - Decrease throttle scale</li>
-<li>dpad left - Increase steering scale</li>
-<li>dpad right - Decrease steering scale</li>
-<li>Start - Toggle constant throttle. Sets to max throttle (modified by X and Triangle).</li>
-</ul>
+<h2 id="joystick-setup">Joystick setup</h2>
+<p>If you plan to use a joystick, take a side track over to <a href="/parts/controllers/#joystick-controller">here</a>.</p>
+<h2 id="camera-setup">Camera Setup</h2>
+<p>If you are on a raspberry pi and using the recommended pi camera, then no changes are needed to your <strong>myconfg.py</strong>. </p>
+<blockquote>
+<p>Jetson Nano: when using a Sony IMX219 based camera, and you are using the default car template, then you will want edit your <strong>myconfg.py</strong> to have:
+<code>CAMERA_TYPE = "CSIC"</code>. </p>
+</blockquote>
+<p>CVCAM is a camera type that has worked for USB cameras when OpenCV is setup. This requires additional setup for <a href="/guide/robot_sbc/setup_jetson_nano/#step-4-install-opencv">OpenCV for Nano</a> or <a href="https://www.learnopencv.com/install-opencv-4-on-raspberry-pi/">OpenCV for Raspberry Pi</a>.</p>
+<p>WEBCAM is a camera type that uses the pygame library, also typically for USB cameras. That requires additional setup for <a href="https://www.pygame.org/wiki/GettingStarted">pygame</a>.</p>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<p>If you are having troubles with your camera, check out our <a href="https://donkey.discourse.group/t/faq-troubleshooting/33">Discourse FAQ for hardware troubleshooting</a>. Check this forum for more help.</p>
 <hr />
-<h3 id="next-lets-train-an-autopilot_1">Next let's <a href="/guide/train_autopilot/">train an autopilot</a>.</h3>
+<h3 id="next-calibrate-your-car">Next <a href="/guide/calibrate/">calibrate your car</a>.</h3>
               
             </div>
           </div>
@@ -317,10 +307,10 @@ python manage.py drive --js
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../train_autopilot/" class="btn btn-neutral float-right" title="Train an autopilot.">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../calibrate/" class="btn btn-neutral float-right" title="Calibrate steering and throttle.">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../calibrate/" class="btn btn-neutral" title="Calibrate steering and throttle."><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../install_software/" class="btn btn-neutral" title="Install the software."><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -348,10 +338,10 @@ python manage.py drive --js
           <a href="https://github.com/autorope/donkeycar/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../calibrate/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../install_software/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../train_autopilot/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../calibrate/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../../img/favicon.ico">
+  <title>Get Your Jetson Nano Working - Donkey Car</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <link href="../../../extra.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Get Your Jetson Nano Working";
+    var mkdocs_page_input_path = "guide/robot_sbc/setup_jetson_nano.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+  <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-99215530-2', 'github.io/donkey');
+      ga('send', 'pageview');
+  </script>
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../../.." class="icon icon-home"> Donkey Car</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">User Guide</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../build_hardware/">Build a car.</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../install_software/">Install the software.</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../create_application/">Create Donkeycar App.</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../calibrate/">Calibrate steering and throttle.</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../get_driving/">Get driving.</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../train_autopilot/">Train an autopilot.</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../simulator/">Donkey Simulator.</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Parts</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../../parts/about/">About</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../parts/actuators/">Actuators</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../parts/controllers/">Controllers</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../parts/stores/">Stores</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../parts/imu/">IMU</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Utilities</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../../utility/donkey/">donkey</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../../supported_cars/">Supported Cars</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../../roll_your_own/">Roll Your Own</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../../contribute/">Contribute</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../../tests/">Tests</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../../release/">Releases</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../../faq/">FAQ</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../..">Donkey Car</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Get Your Jetson Nano Working</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/autorope/donkeycar/edit/master/docs/guide/robot_sbc/setup_jetson_nano.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="get-your-jetson-nano-working">Get Your Jetson Nano Working</h1>
+<p><img alt="donkey" src="/assets/logos/nvidia_logo.png" /></p>
+<ul>
+<li><a href="#step-1-flash-operating-system">Step 1: Flash Operating System</a></li>
+<li><a href="#step-2-install-dependencies">Step 2: Install Dependencies</a></li>
+<li><a href="#step-3-setup-virtual-env">Step 3: Setup Virtual Env</a></li>
+<li><a href="#step-4-install-opencv">Step 4: Install OpenCV</a></li>
+<li><a href="#step-5-install-donkeycar-python-code">Step 5: Install Donkeycar Python Code</a></li>
+<li>Then <a href="/guide/create_application/">Create your Donkeycar Application</a></li>
+</ul>
+<h2 id="step-1-flash-operating-system">Step 1: Flash Operating System</h2>
+<p>Visit the official <a href="https://developer.nvidia.com/embedded/learn/get-started-jetson-nano-devkit#prepare">Nvidia Jetson Nano Getting Started Guide</a>. Work through the <strong>Prepare for Setup</strong>, <strong>Writing Image to the microSD Card</strong>, and <strong>Setup and First Boot</strong> instructions, then return here.</p>
+<h2 id="step-2-install-dependencies">Step 2: Install Dependencies</h2>
+<p>ssh into your vehicle. Use the the terminal for Ubuntu or Mac. <a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html">Putty</a> for windows.</p>
+<pre><code class="bash">sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install build-essential python3 python3-dev python3-pip libhdf5-serial-dev hdf5-tools nano
+</code></pre>
+
+<p>Optionally, you can install RPi.GPIO clone for Jetson Nano from <a href="https://github.com/NVIDIA/jetson-gpio">here</a>. This is not required for default setup, but can be useful if using LED or other GPIO driven devices.</p>
+<h2 id="step-3-setup-virtual-env">Step 3: Setup Virtual Env</h2>
+<pre><code class="bash">pip3 install virtualenv
+python3 -m virtualenv -p python3 env --system-site-packages
+echo &quot;source env/bin/activate&quot; &gt;&gt; ~/.bashrc
+source ~/.bashrc
+</code></pre>
+
+<h2 id="step-4-install-opencv">Step 4: Install OpenCV</h2>
+<p>To install Open CV on the Jetson Nano, you need to build it from source. Building OpenCV from source is going to take some time, so buckle up. If you get stuck, <a href="https://www.pyimagesearch.com/2018/08/15/how-to-install-opencv-4-on-ubuntu/">here</a> is another great resource which will help you compile OpenCV. </p>
+<blockquote>
+<p>Note: In some cases Python OpenCV may already be installed in your disc image. If the file exists, you can optionally copy it to your environment rather than build from source. Nvidia has said they will drop support for this, so longer term we will probably be building it. If this works:</p>
+<p><code>mkdir ~/mycar
+cp /usr/lib/python3.6/dist-packages/cv2.cpython-36m-aarch64-linux-gnu.so ~/mycar/ 
+cd ~/mycar
+python -c "import cv2"</code></p>
+<p>Then you have a working version and can skip this portion of the guide.
+However, following the swapfile portion of this guide has made performance more predictable and solves memory thrashing.</p>
+</blockquote>
+<p>The first step in building OpenCV is to define swap space on the Jetson Nano. The Jetson Nano has <code>4GB</code> of RAM. This is not sufficient to build OpenCV from source. Therefore we need to define swap space on the Nano to prevent memory thrashing.</p>
+<pre><code class="bash"># Allocates 4G of additional swap space at /var/swapfile
+sudo fallocate -l 4G /var/swapfile
+# Permissions
+sudo chmod 600 /var/swapfile
+# Make swap space
+sudo mkswap /var/swapfile
+# Turn on swap
+sudo swapon /var/swapfile
+# Automount swap space on reboot
+sudo bash -c 'echo &quot;/var/swapfile swap swap defaults 0 0&quot; &gt;&gt; /etc/fstab'
+# Reboot
+sudo reboot
+</code></pre>
+
+<p>Now you should have enough swap space to build OpenCV. Let's setup the Jetson Nano with the pre-requisites to build OpenCV.</p>
+<pre><code class="bash"># Update
+sudo apt-get update
+sudo apt-get upgrade
+# Pre-requisites
+sudo apt-get install build-essential cmake unzip pkg-config
+sudo apt-get install libjpeg-dev libpng-dev libtiff-dev
+sudo apt-get install libavcodec-dev libavformat-dev libswscale-dev libv4l-dev
+sudo apt-get install libxvidcore-dev libx264-dev
+sudo apt-get install libgtk-3-dev
+sudo apt-get install libatlas-base-dev gfortran
+sudo apt-get install python3-dev
+</code></pre>
+
+<p>Now you should have all the pre-requisites you need.  So, lets go ahead and download the source code for OpenCV.</p>
+<pre><code class="bash"># Create a directory for opencv
+mkdir -p projects/cv2
+cd projects/cv2
+
+# Download sources
+wget -O opencv.zip https://github.com/opencv/opencv/archive/4.1.0.zip
+wget -O opencv_contrib.zip https://github.com/opencv/opencv_contrib/archive/4.1.0.zip
+
+# Unzip
+unzip opencv.zip
+unzip opencv_contrib.zip
+
+# Rename
+mv opencv-4.1.0 opencv
+mv opencv_contrib-4.1.0 opencv_contrib
+</code></pre>
+
+<p>Let's get our virtual environment (<code>env</code>) ready for OpenCV.</p>
+<pre><code class="bash"># Install Numpy
+pip install numpy
+</code></pre>
+
+<p>Now let's setup <code>CMake</code> correctly so it generates the correct OpenCV bindings for our virtual environment.</p>
+<pre><code class="bash"># Create a build directory
+cd projects/cv2
+mkdir build
+cd build
+
+# Setup CMake
+cmake -D CMAKE_BUILD_TYPE=RELEASE \
+    -D CMAKE_INSTALL_PREFIX=/usr/local \
+    -D INSTALL_PYTHON_EXAMPLES=ON \
+    -D INSTALL_C_EXAMPLES=OFF \
+    -D OPENCV_ENABLE_NONFREE=ON \
+    # Contrib path
+    -D OPENCV_EXTRA_MODULES_PATH=~/projects/cv2/opencv_contrib/modules \
+    # Your virtual environment's Python executable
+    # You need to specify the result of echo $(which python)
+    -D PYTHON_EXECUTABLE=~/env/bin/python \
+    -D BUILD_EXAMPLES=ON ..
+</code></pre>
+
+<p>The <code>cmake</code> command should show a summary of the configuration. Make sure that the <code>Interpreter</code> is set to the Python executable associated to <em>your</em> virtualenv.</p>
+<p>To compile the code from the <code>build</code> folder issue the following command. </p>
+<pre><code class="bash">make -j2
+</code></pre>
+
+<p>This will take a while. Go grab a coffee, or watch a movie.
+Once the compilation is complete, you are almost done. Only a few more steps to go.</p>
+<pre><code class="bash"># Install OpenCV
+sudo make install
+sudo ldconfig
+</code></pre>
+
+<p>The final step is to correctly link the built <code>OpenCV</code> native library to your virtualenv.</p>
+<p>The native library should now be installed in a location that looks like <code>/usr/local/lib/python3.6/site-packages/cv2/python-3.6/cv2.cpython-36m-xxx-linux-gnu.so</code>. </p>
+<pre><code class="bash"># Go to the folder where OpenCV's native library is built
+cd /usr/local/lib/python3.6/site-packages/cv2/python-3.6
+# Rename
+mv cv2.cpython-36m-xxx-linux-gnu.so cv2.so
+# Go to your virtual environments site-packages folder
+cd ~/env/lib/python3.6/site-packages/
+# Symlink the native library
+ln -s /usr/local/lib/python3.6/site-packages/cv2/python-3.6/cv2.so cv2.so
+</code></pre>
+
+<p>Congratulations ! You are now done compiling OpenCV from source.</p>
+<p>A quick check to see if you did everything correctly is</p>
+<pre><code class="bash">ls -al
+</code></pre>
+
+<p>You should see something that looks like</p>
+<pre><code>total 48
+drwxr-xr-x 10 user user 4096 Jun 16 13:03 .
+drwxr-xr-x  5 user user 4096 Jun 16 07:46 ..
+lrwxrwxrwx  1 user user   60 Jun 16 13:03 cv2.so -&gt; /usr/local/lib/python3.6/site-packages/cv2/python-3.6/cv2.so
+-rw-r--r--  1 user user  126 Jun 16 07:46 easy_install.py
+drwxr-xr-x  5 user user 4096 Jun 16 07:47 pip
+drwxr-xr-x  2 user user 4096 Jun 16 07:47 pip-19.1.1.dist-info
+drwxr-xr-x  5 user user 4096 Jun 16 07:46 pkg_resources
+drwxr-xr-x  2 user user 4096 Jun 16 07:46 __pycache__
+drwxr-xr-x  6 user user 4096 Jun 16 07:46 setuptools
+drwxr-xr-x  2 user user 4096 Jun 16 07:46 setuptools-41.0.1.dist-info
+drwxr-xr-x  4 user user 4096 Jun 16 07:47 wheel
+drwxr-xr-x  2 user user 4096 Jun 16 07:47 wheel-0.33.4.dist-info
+</code></pre>
+
+<p>To test the OpenCV installation, run <code>python</code> and do the following</p>
+<pre><code class="python">import cv2
+
+# Should print 4.1.0
+print(cv2.__version__)
+</code></pre>
+
+<h2 id="step-5-install-donkeycar-python-code">Step 5: Install Donkeycar Python Code</h2>
+<ul>
+<li>Change to a dir you would like to use as the head of your projects.</li>
+</ul>
+<pre><code>cd projects
+</code></pre>
+
+<ul>
+<li>Get the latest donkeycar from Github.</li>
+</ul>
+<pre><code class="bash">git clone https://github.com/autorope/donkeycar
+cd donkeycar
+git checkout master
+pip install -e .[nano]
+pip install --extra-index-url https://developer.download.nvidia.com/compute/redist/jp/v42 tensorflow-gpu==1.13.1+nv19.3
+</code></pre>
+
+<hr />
+<h3 id="next-create-your-donkeycar-application">Next, <a href="/guide/create_application/">create your Donkeycar application</a>.</h3>
+              
+            </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/autorope/donkeycar/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+      
+    </span>
+</div>
+    <script>var base_url = '../../..';</script>
+    <script src="../../../js/theme.js" defer></script>
+      <script src="../../../search/main.js" defer></script>
+
+</body>
+</html>
