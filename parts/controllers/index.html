@@ -122,7 +122,7 @@
         
             <li><a class="toctree-l4" href="#web-controller">Web Controller</a></li>
         
-            <li><a class="toctree-l4" href="#joystic-controller">Joystic Controller</a></li>
+            <li><a class="toctree-l4" href="#joystick-controller">Joystick Controller</a></li>
         
             <li><a class="toctree-l4" href="#ps3-controller">PS3 Controller</a></li>
         
@@ -235,7 +235,10 @@
 <li>A physical joystick using the web adapter. Support varies per browser, OS, and joystick combination.</li>
 <li>Keyboard input via the 'ikjl' keys.</li>
 </ol>
-<h2 id="joystic-controller">Joystic Controller</h2>
+<blockquote>
+<p>Note: Recently iOS has <a href="https://www.macrumors.com/2019/02/04/ios-12-2-safari-motion-orientation-access-toggle/">disabled default Safari</a> access to motion control. </p>
+</blockquote>
+<h2 id="joystick-controller">Joystick Controller</h2>
 <p>Many people find it easier to control the car using a game controller. There are several parts that provide this option.</p>
 <p>The default web controller may be replaced with a one line change to use a physical joystick part for input. This uses the OS device /dev/input/js0 by default. In theory, any joystick device that the OS mounts like this can be used. In practice, the behavior will change depending on the model of joystick ( Sony, or knockoff ), or XBox controller and the Bluetooth driver used to support it. The default code has been written and tested with a <a href="https://www.ebay.com/sch/i.html?_nkw=Sony+Playstation+Dualshock+PS3+controller+OEM">Sony brand PS3 Sixaxis controller</a>. Other controllers may work, but will require alternative Bluetooth installs, and tweaks to the software for correct axis and buttons.</p>
 <h3 id="these-joysticks-are-known-to-work">These joysticks are known to work:</h3>
