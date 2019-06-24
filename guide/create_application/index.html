@@ -89,6 +89,8 @@
         
             <li><a class="toctree-l4" href="#configure-options">Configure Options</a></li>
         
+            <li><a class="toctree-l4" href="#sombrero-setup">Sombrero Setup</a></li>
+        
             <li><a class="toctree-l4" href="#joystick-setup">Joystick setup</a></li>
         
             <li><a class="toctree-l4" href="#camera-setup">Camera Setup</a></li>
@@ -279,6 +281,10 @@ sudo i2cdetect -y 1
 <p>If you have assigned a non-standard address to your board, then adjust the address in the myconfig.py <code>PCA9685_I2C_ADDR</code>. If your board is on another bus, then you can specify that with the <code>PCA9685_I2C_BUSNUM</code>.</p>
 <blockquote>
 <p>Jetson Nano: set <code>PCA9685_I2C_BUSNUM = 1</code> in your <strong>myconfig.py</strong> . For the pi, this will be auto detected by the Adafruit library. But not on the Jetson Nano.</p>
+</blockquote>
+<h2 id="sombrero-setup">Sombrero Setup</h2>
+<blockquote>
+<p>Sombrero: set <code>HAVE_SOMBRERO = True</code> in your <strong>myconfig.py</strong> if you have a sombrero board.</p>
 </blockquote>
 <h2 id="joystick-setup">Joystick setup</h2>
 <p>If you plan to use a joystick, take a side track over to <a href="/parts/controllers/#joystick-controller">here</a>.</p>
