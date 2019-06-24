@@ -410,7 +410,6 @@ on the host that are deleted on the pi. This allows your PS3 Triangle edits to a
 <li>First make sure the OS can access your device. The utility <code>jstest</code> can be useful here. Installed via: <code>sudo apt install joystick</code></li>
 <li>Debian commonly creates the joystick device file at /dev/input/js0. If not, find out where.</li>
 <li>Run the command <code>donkey createjs</code> and it will create a file, by default my_joystick.py. Drop that next to your manage.py</li>
-<li>Modify manage.py to add: <code>from my_joystick import MyJoystickController</code></li>
 <li>Modify manage.py to replace:</li>
 </ul>
 <pre><code>    from donkeycar.parts.controller import get_js_controller
