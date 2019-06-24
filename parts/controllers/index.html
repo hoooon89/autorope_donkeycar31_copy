@@ -238,9 +238,7 @@
 <h2 id="joystic-controller">Joystic Controller</h2>
 <p>Many people find it easier to control the car using a game controller. There are several parts that provide this option.</p>
 <p>The default web controller may be replaced with a one line change to use a physical joystick part for input. This uses the OS device /dev/input/js0 by default. In theory, any joystick device that the OS mounts like this can be used. In practice, the behavior will change depending on the model of joystick ( Sony, or knockoff ), or XBox controller and the Bluetooth driver used to support it. The default code has been written and tested with a <a href="https://www.ebay.com/sch/i.html?_nkw=Sony+Playstation+Dualshock+PS3+controller+OEM">Sony brand PS3 Sixaxis controller</a>. Other controllers may work, but will require alternative Bluetooth installs, and tweaks to the software for correct axis and buttons.</p>
-<p>These can be used plugged in with a USB cable. It's been much more convenient to setup Bluetooth for a wireless control.</p>
-<p>If you have a non PS3 controller, or having troubles getting your controller buttons to work, checkout this <a href="https://github.com/autorope/donkeycar/blob/master/docs/utility/donkey.md#joystick-wizard">guide</a> to making python code that matches your device.</p>
-<p>These joysticks are known to work:</p>
+<h3 id="these-joysticks-are-known-to-work">These joysticks are known to work:</h3>
 <ul>
 <li><a href="https://www.amazon.com/Logitech-940-000117-Gamepad-F710/dp/B0041RR0TW">Logitech Gamepad F710</a></li>
 <li><a href="https://www.ebay.com/sch/i.html?&amp;_nkw=Sony+PS3+Sixaxis+OEM">Sony PS3 Sixaxis OEM</a></li>
@@ -250,12 +248,19 @@
 <li><a href="https://www.amazon.com/gp/product/B01AZC3III">SteelSeries Nimbus</a> (works only on TX2 jetpack 4.2+, may work on the Nano)</li>
 </ul>
 <p>These can be enabled by finding the CONTROLLER_TYPE in your myconfig.py and setting it to the correct string identifier ( after disabling the comment ).</p>
+<p>These can be used plugged in with a USB cable. It's been much more convenient to setup Bluetooth for a wireless control.</p>
 <p>There are controller specific setup details below.</p>
+<h3 id="customizing-or-adding-a-new-controller-type">Customizing or Adding a New Controller Type</h3>
+<blockquote>
+<p>Note: If are having troubles getting your controller to work, try this <a href="https://github.com/autorope/donkeycar/blob/master/docs/utility/donkey.md#joystick-wizard">Joystick Wizard</a>. This can help customize your buttons and axis inputs as well.</p>
+</blockquote>
 <h3 id="change-to-configpy-or-run-with-js">Change to config.py or run with --js</h3>
 <pre><code>python manage.py drive --js
 </code></pre>
 
 <p>Will enable driving with the joystick. This disables the live preview of the camera and the web page features. If you modify config.py to make USE_JOYSTICK_AS_DEFAULT = True, then you do not need to run with the --js.</p>
+<hr />
+<hr />
 <h2 id="ps3-controller">PS3 Controller</h2>
 <h3 id="bluetooth-setup">Bluetooth Setup</h3>
 <p>Follow <a href="https://pythonhosted.org/triangula/sixaxis.html">this guide</a>. You can ignore steps past the 'Accessing the SixAxis from Python' section. I will include steps here in case the link becomes stale.</p>
@@ -318,6 +323,8 @@ quit
 <pre><code>xinput set-prop &quot;Sony PLAYSTATION(R)3 Controller&quot; &quot;Device Enabled&quot; 0
 </code></pre>
 
+<hr />
+<hr />
 <h2 id="ps4-controller">PS4 Controller</h2>
 <p>The following instructions are based on <a href="https://github.com/RetroPie/RetroPie-Setup/wiki/PS4-Controller#installation">RetroPie</a> and <a href="https://github.com/chrippa/ds4drv">ds4drv</a>.</p>
 <h4 id="install-ds4drv">Install <code>ds4drv</code>.</h4>
@@ -335,6 +342,8 @@ sudo udevadm trigger
 <h4 id="run-ds4drv-in-background-on-startup-once-booted">Run <code>ds4drv</code> in background on startup once booted.</h4>
 <p><code>sudo nano /etc/rc.local</code>. paste <code>/home/pi/env/bin/ds4drv --led 00ff00</code> into the file. Save and exit. Again, with or without <code>--hidraw</code>, depending on the particular controller you are using.</p>
 <p>To disconnect, kill the process <code>ds4drv</code> and hold <strong>PS</strong> for 10 seconds to power off the controller.</p>
+<hr />
+<hr />
 <h2 id="xbox-one-controller">XBox One Controller</h2>
 <h3 id="bluetooth-pairing">bluetooth pairing</h3>
 <p>This code presumes the built-in linux driver for 'Xbox Wireless Controller'; this is pre-installed on Raspbian, so there is no need to install any other drivers.  This will generally show up on /dev/input/js0.  There is another userland driver called xboxdrv; this code has not been tested with that driver.</p>

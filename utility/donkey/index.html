@@ -411,8 +411,24 @@ on the host that are deleted on the pi. This allows your PS3 Triangle edits to a
 <li>Debian commonly creates the joystick device file at /dev/input/js0. If not, find out where.</li>
 <li>Run the command <code>donkey createjs</code> and it will create a file, by default my_joystick.py. Drop that next to your manage.py</li>
 <li>Modify manage.py to add: <code>from my_joystick import MyJoystickController</code></li>
-<li>Modify manage.py to replace <code>cont_class = PS3JoystickController</code> with <code>cont_class = MyJoystickController</code></li>
+<li>Modify manage.py to replace:</li>
 </ul>
+<pre><code>    from donkeycar.parts.controller import get_js_controller
+
+    ctr = get_js_controller(cfg)
+</code></pre>
+
+<p>with </p>
+<pre><code>    from my_joystick import MyJoystickController
+
+    ctr = MyJoystickController(throttle_dir=cfg.JOYSTICK_THROTTLE_DIR,
+                                throttle_scale=cfg.JOYSTICK_MAX_THROTTLE,
+                                steering_scale=cfg.JOYSTICK_STEERING_SCALE,
+                                auto_record_on_throttle=cfg.AUTO_RECORD_ON_THROTTLE)
+
+    ctr.set_deadzone(cfg.JOYSTICK_DEADZONE)
+</code></pre>
+
 <h2 id="visualize-cnn-filter-activations">Visualize CNN filter activations</h2>
 <p>Shows feature maps of the provided image for each filter in each of the convolutional layers in the model provided. Debugging tool to visualize how well feature extraction is performing. </p>
 <p>Usage:</p>

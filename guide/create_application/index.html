@@ -87,8 +87,6 @@
         
             <li><a class="toctree-l4" href="#create-donkeycar-from-template">Create Donkeycar from Template</a></li>
         
-            <li><a class="toctree-l4" href="#updating">Updating</a></li>
-        
             <li><a class="toctree-l4" href="#configure-options">Configure Options</a></li>
         
             <li><a class="toctree-l4" href="#joystick-setup">Joystick setup</a></li>
@@ -96,6 +94,8 @@
             <li><a class="toctree-l4" href="#camera-setup">Camera Setup</a></li>
         
             <li><a class="toctree-l4" href="#troubleshooting">Troubleshooting</a></li>
+        
+            <li><a class="toctree-l4" href="#keeping-things-up-to-date">Keeping Things Up To Date</a></li>
         
         </ul>
     
@@ -236,12 +236,6 @@
 </code></pre>
 
 <p>See also more information on <a href="/utility/donkey/#create-car">createcar.</a></p>
-<h2 id="updating">Updating</h2>
-<p>Make all config changes to <strong>myconfig.py</strong> and they will be preserved through an update. If you are a long time user, you might be used to editing config.py. You should switch to editing myconfig.py instead. Later on, when changes occur that you would like to get, you can pull latest code, then issue a:</p>
-<pre><code>donkey createcar --path ~/mycar --overwrite
-</code></pre>
-
-<p>Your ~/mycar/manage.py, ~/mycar/config.py and other files will change with this operation. But <strong>myconfig.py</strong> will not be touched.</p>
 <h2 id="configure-options">Configure Options</h2>
 <p>Look at <strong>myconfig.py</strong></p>
 <pre><code>nano myconfig.py
@@ -298,6 +292,17 @@ sudo i2cdetect -y 1
 <p>WEBCAM is a camera type that uses the pygame library, also typically for USB cameras. That requires additional setup for <a href="https://www.pygame.org/wiki/GettingStarted">pygame</a>.</p>
 <h2 id="troubleshooting">Troubleshooting</h2>
 <p>If you are having troubles with your camera, check out our <a href="https://donkey.discourse.group/t/faq-troubleshooting/33">Discourse FAQ for hardware troubleshooting</a>. Check this forum for more help.</p>
+<h2 id="keeping-things-up-to-date">Keeping Things Up To Date</h2>
+<p>Make all config changes to <strong>myconfig.py</strong> and they will be preserved through an update. If you are a long time user, you might be used to editing config.py. You should switch to editing myconfig.py instead. Later on, when changes occur that you would like to get, you can pull latest code, then issue a:</p>
+<pre><code class="bash">cd projects/donkeycar
+git pull
+donkey createcar --path ~/mycar --overwrite
+</code></pre>
+
+<p>Your ~/mycar/manage.py, ~/mycar/config.py and other files will change with this operation. But <strong>myconfig.py</strong> will not be touched. Your <strong>data</strong> and <strong>models</strong> dirs will not be touched.</p>
+<blockquote>
+<p>Note: If you are updating from Donkey&lt;3.0 to 3.0+ it is very likely you will need to start over with a new virtual environment. We've had a few users hit this snag.</p>
+</blockquote>
 <hr />
 <h3 id="next-calibrate-your-car">Next <a href="/guide/calibrate/">calibrate your car</a>.</h3>
               
