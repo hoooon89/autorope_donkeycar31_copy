@@ -130,6 +130,8 @@
         
             <li><a class="toctree-l4" href="#xbox-one-controller">XBox One Controller</a></li>
         
+            <li><a class="toctree-l4" href="#discovering-modifying-button-and-axis-mappings-for-game-controllers">Discovering / Modifying Button and Axis Mappings for Game Controllers</a></li>
+        
         </ul>
     
 
@@ -384,6 +386,24 @@ quit
 </code></pre>
 
 <p>Now that your controller is trusted, it should automatically connect with your Raspberry Pi when they are both turned on.  If your controller fails to connect, run the bluetoothctl steps again to reconnect.</p>
+<h2 id="discovering-modifying-button-and-axis-mappings-for-game-controllers">Discovering / Modifying Button and Axis Mappings for Game Controllers</h2>
+<p>To discover and modify your default button mappings (for your controllers) you can use the <code>Joystick</code> class defined in <code>donkeycar.parts.controller</code>.</p>
+<p>After setting up <code>Donkey</code> and activating your <code>virtualenv</code> you can do the following.
+First launch a <code>python</code> shell session.</p>
+<pre><code class="python">from donkeycar.parts.controller import Joystick
+
+joystick = Joystick() # uses the connected joystick at /dev/input/js0
+
+joystick.init() # Initialize
+
+joystick.show_map() # Will give you a list of axes and buttons detected.
+
+# Now you can use the controller and check for the outputs. This will
+# tell you which buttons and axes are active when you are using the
+# controller.
+while True:
+    joystick.poll()
+</code></pre>
               
             </div>
           </div>
