@@ -99,6 +99,12 @@
             
     <li class="toctree-l3"><a href="#donkey-simulator">Donkey Simulator</a></li>
     
+        <ul>
+        
+            <li><a class="toctree-l4" href="#my-virtual-donkey">My Virtual Donkey</a></li>
+        
+        </ul>
+    
 
     </ul>
                 </li>
@@ -213,10 +219,66 @@
             <div class="section">
               
                 <h1 id="donkey-simulator">Donkey Simulator</h1>
-<p>Experiment with training a donkey car to drive in simulation. This simulator is built on the the Unity game platform, uses their internal physics and graphics, and connects to a donkey Python process to use our trained model to control the simulated Donkey.</p>
-<p>Go to <a href="https://github.com/tawnkramer/donkey_gym">Donkey Gym</a> as well as 
-<a href="https://github.com/tawnkramer/donkey_gym/tree/master/examples/supervised_learning/README.md">Donkey Gym Supervised Learning</a></p>
-<p>More details to come...</p>
+<p>The <a href="https://github.com/tawnkramer/donkey_gym">Donkey Gym</a> project is a OpenAI gym wrapper around the <a href="https://github.com/tawnkramer/sdsandbox/tree/donkey">Self Driving Sandbox</a> donkey simulator. When building the sim from source, checkout the <code>donkey</code> branch of the sdsandbox project. </p>
+<p>The simulator is built on the the Unity game platform, uses their internal physics and graphics, and connects to a donkey Python process to use our trained model to control the simulated Donkey.</p>
+<h2 id="my-virtual-donkey">My Virtual Donkey</h2>
+<p>There are many ways to use the simulator, depending on your goals. You can use the simulator to get to know and use the standard Donkeycar drive/train/test cycle by treating it as virtual hardware. You will collect data, drive, and train using the <strong>same commands</strong> as if you were using a real robot. We will walk through that use-case first.</p>
+<p><img alt="sim_screen_shot" src="../../assets/sim_screen_shot.png" /></p>
+<h3 id="install">Install</h3>
+<ul>
+<li>Download and unzip the simulator for your host pc platform from <a href="https://github.com/tawnkramer/donkey_gym/releases">Donkey Gym Release</a>.</li>
+<li>Place the simulator where you like. For this example it will be ~/projects/DonkeySimLinux. Your dir will have a different name depending on platform. </li>
+<li>Complete all the steps to <a href="../install_software/#step-1-install-software-on-host-pc">install Donkey on your host pc</a>.</li>
+<li>Setup DonkeyGym: </li>
+</ul>
+<pre><code>cd ~/projects
+git clone https://github.com/tawnkramer/donkey_gym
+conda activate donkey
+pip install -e donkey_gym
+</code></pre>
+
+<ul>
+<li>You may use an existing ~/mycar donkey application, or begin a new one. Here we will start fresh: </li>
+</ul>
+<pre><code>donkey createcar --path ~/mysim
+cd ~/mysim
+</code></pre>
+
+<ul>
+<li>Edit your myconfig.py to enable donkey gym simulator wrapper:</li>
+</ul>
+<pre><code>DONKEY_GYM = True
+DONKEY_SIM_PATH = &quot;/home/tkramer/projects/DonkeySimLinux/donkey_sim.x86_64&quot;
+DONKEY_GYM_ENV_NAME = &quot;donkey-generated-track-v0&quot;
+</code></pre>
+
+<blockquote>
+<p>Note: your path to the executable will vary depending on platform and user.</p>
+</blockquote>
+<h3 id="drive">Drive</h3>
+<p>You may use all the normal commands to manage.py at this point. Such as:</p>
+<pre><code>python manage.py drive
+</code></pre>
+
+<p>This should start the simulator and connect to it automatically. By default you will have a web interface to control the donkey. Navigate to http://localhost:8887/drive to see control page.</p>
+<p>On Ubuntu Linux only, you may plug in your joystick of choice. If it mounts as /dev/input/js0 then there's a good chance it will work. Modify myconfig.py to indicate your joystick model and use the --js arg to run.</p>
+<pre><code>python manage.py drive --js
+</code></pre>
+
+<p>As you drive, this will create a tub of records in your data dir as usual.</p>
+<h3 id="train">Train</h3>
+<p>You will not need to rsync your data, as it was recorded and resides locally. You can train as usual:</p>
+<pre><code>python manage.py train --model models/mypilot.h5
+</code></pre>
+
+<h3 id="test">Test</h3>
+<p>You can use the model as usual:</p>
+<pre><code>python manage.py drive --model models/mypilot.h5
+</code></pre>
+
+<p>Then navigate to web control page. Set <code>Mode and Pilot</code> to <code>Local Pilot(d)</code>. The car should start driving.</p>
+<h3 id="sample-driving-data">Sample Driving Data</h3>
+<p>Here's some sample drivng data to get you started. <a href="https://drive.google.com/open?id=1A5sTSddFsf494UDtnvYQBaEPYX87_LMp">Download this</a> and unpack it into your data dir. This should train to a slow but stable driver.</p>
               
             </div>
           </div>
