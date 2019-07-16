@@ -135,6 +135,10 @@
                 </li>
                 <li class="">
                     
+    <a class="" href="../../parts/keras/">Keras</a>
+                </li>
+                <li class="">
+                    
     <a class="" href="../../parts/stores/">Stores</a>
                 </li>
                 <li class="">
@@ -257,7 +261,12 @@ folder from the raspberry pi.</p>
 </code></pre>
 
 <ul>
-<li>Now you can use rsync again to move your pilot back to your car.</li>
+<li>
+<p>You can create different model types with the --type argument during training. You may also choose to change the default model type in myconfig.py DEFAULT_MODEL_TYPE. When specifying a new model type, be sure to provide that type when running the model, or using the model in other tools like plotting or profiling. For more information on the different model types, look here for <a href="/parts/keras">Keras Parts</a>.</p>
+</li>
+<li>
+<p>Now you can use rsync again to move your pilot back to your car.</p>
+</li>
 </ul>
 <pre><code class="bash">rsync -r ~/mycar/models/ pi@&lt;your_ip_address&gt;:~/mycar/models/
 </code></pre>
