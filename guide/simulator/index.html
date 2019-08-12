@@ -223,22 +223,22 @@
             <div class="section">
               
                 <h1 id="donkey-simulator">Donkey Simulator</h1>
-<p>The <a href="https://github.com/tawnkramer/donkey_gym">Donkey Gym</a> project is a OpenAI gym wrapper around the <a href="https://github.com/tawnkramer/sdsandbox/tree/donkey">Self Driving Sandbox</a> donkey simulator. When building the sim from source, checkout the <code>donkey</code> branch of the sdsandbox project. </p>
+<p>The <a href="https://github.com/tawnkramer/gym-donkeycar">Donkey Gym</a> project is a OpenAI gym wrapper around the <a href="https://github.com/tawnkramer/sdsandbox/tree/donkey">Self Driving Sandbox</a> donkey simulator. When building the sim from source, checkout the <code>donkey</code> branch of the sdsandbox project. </p>
 <p>The simulator is built on the the Unity game platform, uses their internal physics and graphics, and connects to a donkey Python process to use our trained model to control the simulated Donkey.</p>
 <h2 id="my-virtual-donkey">My Virtual Donkey</h2>
 <p>There are many ways to use the simulator, depending on your goals. You can use the simulator to get to know and use the standard Donkeycar drive/train/test cycle by treating it as virtual hardware. You will collect data, drive, and train using the <strong>same commands</strong> as if you were using a real robot. We will walk through that use-case first.</p>
 <p><img alt="sim_screen_shot" src="../../assets/sim_screen_shot.png" /></p>
 <h3 id="install">Install</h3>
 <ul>
-<li>Download and unzip the simulator for your host pc platform from <a href="https://github.com/tawnkramer/donkey_gym/releases">Donkey Gym Release</a>.</li>
+<li>Download and unzip the simulator for your host pc platform from <a href="https://github.com/tawnkramer/gym-donkeycar/releases">Donkey Gym Release</a>.</li>
 <li>Place the simulator where you like. For this example it will be ~/projects/DonkeySimLinux. Your dir will have a different name depending on platform. </li>
 <li>Complete all the steps to <a href="../install_software/#step-1-install-software-on-host-pc">install Donkey on your host pc</a>.</li>
 <li>Setup DonkeyGym: </li>
 </ul>
 <pre><code>cd ~/projects
-git clone https://github.com/tawnkramer/donkey_gym
+git clone https://github.com/tawnkramer/gym-donkeycar
 conda activate donkey
-pip install -e donkey_gym
+pip install -e gym-donkeycar
 </code></pre>
 
 <ul>

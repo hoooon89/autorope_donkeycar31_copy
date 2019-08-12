@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../../../img/favicon.ico">
-  <title>Install Donkeycar on Linux - Donkey Car</title>
+  <title>A Guide to using TensorRT on the Nvidia Jetson Nano - Donkey Car</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../../css/theme.css" type="text/css" />
@@ -18,8 +18,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Install Donkeycar on Linux";
-    var mkdocs_page_input_path = "guide/host_pc/setup_ubuntu.md";
+    var mkdocs_page_name = "A Guide to using TensorRT on the Nvidia Jetson Nano";
+    var mkdocs_page_input_path = "guide/robot_sbc/tensorrt_jetson_nano.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -193,10 +193,10 @@
     
       
     
-    <li>Install Donkeycar on Linux</li>
+    <li>A Guide to using TensorRT on the Nvidia Jetson Nano</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="https://github.com/autorope/donkeycar/edit/master/docs/guide/host_pc/setup_ubuntu.md"
+        <a href="https://github.com/autorope/donkeycar/edit/master/docs/guide/robot_sbc/tensorrt_jetson_nano.md"
           class="icon icon-github"> Edit on GitHub</a>
       
     </li>
@@ -206,77 +206,86 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="install-donkeycar-on-linux">Install Donkeycar on Linux</h1>
-<p><img alt="donkey" src="/assets/logos/linux_logo.png" /></p>
-<blockquote>
-<p>Note : tested on Ubuntu 18.04 LTS</p>
-</blockquote>
-<ul>
-<li>
-<p>Open the Terminal application.</p>
-</li>
-<li>
-<p>Install <a href="https://conda.io/miniconda.html">miniconda Python 3.7 64 bit</a>. </p>
-</li>
-</ul>
-<pre><code>wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
-bash ./Miniconda3-latest-Linux-x86_64.sh
-</code></pre>
-
-<ul>
-<li>Change to a dir you would like to use as the head of your projects.</li>
-</ul>
-<pre><code>mkdir projects
-cd projects
-</code></pre>
-
-<ul>
-<li>Get the latest donkeycar from Github.</li>
-</ul>
-<pre><code>git clone https://github.com/autorope/donkeycar
-cd donkeycar
-git checkout master
-</code></pre>
-
-<ul>
-<li>If this is not your first install, update Conda and remove old donkey</li>
-</ul>
-<pre><code>conda update -n base -c defaults conda
-conda env remove -n donkey
-</code></pre>
-
-<ul>
-<li>Create the Python anaconda environment</li>
-</ul>
-<pre><code>conda env create -f install/envs/ubuntu.yml
-conda activate donkey
-pip install -e .[pc]
-</code></pre>
-
-<ul>
-<li>Optional Install Tensorflow GPU</li>
-</ul>
-<p>You should have an NVidia GPU with the latest drivers. Conda will handle installing the correct cuda and cuddn libraries for the version of tensorflow you are using.</p>
-<pre><code>conda install tensorflow-gpu==1.13.1
-</code></pre>
-
-<ul>
-<li>Optional Install Coral edge tpu compiler</li>
-</ul>
-<p>If you have a Google Coral edge tpu, you may wish to compile models. You will need to install the edgetpu_compiler exectutable. Follow <a href="https://coral.withgoogle.com/docs/edgetpu/compiler/">their instructions</a>.</p>
-<ul>
-<li>Create your local working dir:</li>
-</ul>
-<pre><code>donkey createcar --path ~/mycar
-</code></pre>
-
-<blockquote>
-<p>Note: After closing the Anaconda Prompt, when you open it again, you will need to 
-type <code>conda activate donkey</code> to re-enable the mappings to donkey specific 
-Python libraries</p>
-</blockquote>
+                <h1 id="a-guide-to-using-tensorrt-on-the-nvidia-jetson-nano">A Guide to using TensorRT on the Nvidia Jetson Nano</h1>
 <hr />
-<h3 id="next-lets-install-software-on-donkeycar">Next let's <a href="/guide/install_software/#step-2-install-software-on-donkeycar">install software on Donkeycar</a></h3>
+<ul>
+<li><strong>Note</strong> This guide assumes that you are using Ubuntu <code>18.04</code>. If you are using Windows refer to <a href="https://docs.nvidia.com/deeplearning/sdk/tensorrt-install-guide/index.html">these</a> instructions on how to setup your computer to use TensorRT.</li>
+</ul>
+<hr />
+<h2 id="step-1-setup-tensorrt-on-ubuntu-machine">Step 1: Setup TensorRT on Ubuntu Machine</h2>
+<p>Follow the instructions <a href="https://docs.nvidia.com/deeplearning/sdk/tensorrt-install-guide/index.html#installing-tar">here</a>. Make sure you use the <code>tar</code> file instructions unless you have previously installed CUDA using <code>.deb</code> files.</p>
+<h2 id="step-2-setup-tensorrt-on-your-jetson-nano">Step 2: Setup TensorRT on your Jetson Nano</h2>
+<ul>
+<li>Setup some environment variables so <code>nvcc</code> is on <code>$PATH</code>. Add the following lines to your <code>~/.bashrc</code> file.</li>
+</ul>
+<pre><code class="bash"># Add this to your .bashrc file
+export CUDA_HOME=/usr/local/cuda
+# Adds the CUDA compiler to the PATH
+export PATH=$CUDA_HOME/bin:$PATH
+# Adds the libraries
+export LD_LIBRARY_PATH=$CUDA_HOME/lib64:$LD_LIBRARY_PATH
+</code></pre>
+
+<ul>
+<li>Test the changes to your <code>.bashrc</code>.</li>
+</ul>
+<pre><code class="bash">source ~/.bashrc
+nvcc --version
+</code></pre>
+
+<p>You should see something like:</p>
+<pre><code>nvcc: NVIDIA (R) Cuda compiler driver
+Copyright (c) 2005-2018 NVIDIA Corporation
+Built on ...
+Cuda compilation tools, release 10.0, Vxxxxx
+</code></pre>
+
+<ul>
+<li>Switch to your <code>virtualenv</code> and install PyCUDA.</li>
+</ul>
+<pre><code class="bash"># This takes a a while.`
+pip install pycuda
+</code></pre>
+
+<ul>
+<li>After this you will also need to setup <code>PYTHONPATH</code> such that your <code>dist-packages</code> are included as part of your <code>virtualenv</code>. Add this to your <code>.bashrc</code>. This needs to be done because the python bindings to <code>tensorrt</code> are available in <code>dist-packages</code> and this folder is usually not visible to your virtualenv. To make them visible we add it to <code>PYTHONPATH</code>.</li>
+</ul>
+<pre><code class="bash">export PYTHONPATH=/usr/lib/python3.6/dist-packages:$PYTHONPATH
+</code></pre>
+
+<ul>
+<li>Test this change by switching to your <code>virtualenv</code> and importing <code>tensorrt</code>.</li>
+</ul>
+<pre><code class="python">&gt; import tensorrt as trt
+&gt; # This import should succeed
+</code></pre>
+
+<h2 id="step-3-train-freeze-and-export-your-model-to-tensorrt-format-uff">Step 3: Train, Freeze and Export your model to TensorRT format (<code>uff</code>)</h2>
+<p>After you train the <code>linear</code> model you end up with a file with a <code>.h5</code> extension.</p>
+<pre><code class="bash"># You end up with a Linear.h5 in the models folder
+python manage.py train --model=./models/Linear.h5 --tub=./data/tub_1_19-06-29,...
+# Freeze model using freeze_model.py in donkeycar/scripts
+# The frozen model is stored as protocol buffers.
+# This command also exports some metadata about the model which is saved in ./models/Linear.metadata
+python freeze_model.py --model=./models/Linear.h5 --output=./models/Linear.pb
+# Convert the frozen model to UFF. The command below creates a file ./models/Linear.uff
+convert-to-uff ./models/Linear.pb
+</code></pre>
+
+<p>Now copy the converted <code>uff</code> model and the <code>metadata</code> to your Jetson Nano.</p>
+<h2 id="step-4">Step 4</h2>
+<ul>
+<li>In <code>config.py</code> pick the model type as <code>tensorrt_linear</code>.</li>
+</ul>
+<pre><code class="python">DEFAULT_MODEL_TYPE = `tensorrt_linear`
+</code></pre>
+
+<ul>
+<li>Finally you can do</li>
+</ul>
+<pre><code class="bash"># After you scp your `uff` model to the Nano
+python manage.py drive --model=./models/Linear.uff
+</code></pre>
               
             </div>
           </div>

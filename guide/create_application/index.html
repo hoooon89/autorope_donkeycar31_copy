@@ -243,7 +243,7 @@
 
 <p>See also more information on <a href="/utility/donkey/#create-car">createcar.</a></p>
 <h2 id="configure-options">Configure Options</h2>
-<p>Look at <strong>myconfig.py</strong></p>
+<p>Look at <strong>myconfig.py</strong> in your newly created directory, ~/mycar</p>
 <pre><code>nano myconfig.py
 </code></pre>
 
@@ -296,7 +296,7 @@ sudo i2cdetect -y 1
 <p>If you are on a raspberry pi and using the recommended pi camera, then no changes are needed to your <strong>myconfg.py</strong>. </p>
 <blockquote>
 <p>Jetson Nano: when using a Sony IMX219 based camera, and you are using the default car template, then you will want edit your <strong>myconfg.py</strong> to have:
-<code>CAMERA_TYPE = "CSIC"</code>. </p>
+<code>CAMERA_TYPE = "CSIC"</code>. For flipping the image vertically set <code>CSIC_CAM_GSTREAMER_FLIP_PARM = 6</code>. This is helpful if you have to mount the camera in a rotated position.</p>
 </blockquote>
 <p>CVCAM is a camera type that has worked for USB cameras when OpenCV is setup. This requires additional setup for <a href="/guide/robot_sbc/setup_jetson_nano/#step-4-install-opencv">OpenCV for Nano</a> or <a href="https://www.learnopencv.com/install-opencv-4-on-raspberry-pi/">OpenCV for Raspberry Pi</a>.</p>
 <p>WEBCAM is a camera type that uses the pygame library, also typically for USB cameras. That requires additional setup for <a href="https://www.pygame.org/wiki/GettingStarted">pygame</a>.</p>
