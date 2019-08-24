@@ -377,14 +377,24 @@ pip install tensorflow==1.13.1
 </code></pre>
 
 <p>Note: If you would like to try tflite support, you will need a newer version of Tensorflow. You can download and install this version:</p>
+<p>For Pi3 Raspian Stretch:</p>
 <pre><code class="bash">wget https://tawn-train.s3.amazonaws.com/tf/tensorflow-2.0.0a0-cp35-cp35m-linux_armv7l.whl
 pip install tensorflow-2.0.0a0-cp35-cp35m-linux_armv7l.whl
 </code></pre>
 
+<p>For Raspian Buster Python 3.7:
+TF 2.0 Not yet available. Check donkeycar.slack.com for updates.</p>
 <h2 id="step-12-install-optional-opencv">Step 12: Install Optional OpenCV</h2>
 <p>If you've opted to install the OpenCV dependencies earlier, you can install Python OpenCV bindings now with</p>
+<pre><code class="bash">sudo apt install python3-opencv
+</code></pre>
+
+<p>If that failed, you can try pip:</p>
 <pre><code class="bash">pip install opencv-python
-python -c &quot;import cv2&quot;
+</code></pre>
+
+<p>Then test to see if import suceeds.</p>
+<pre><code class="bash">python -c &quot;import cv2&quot;
 </code></pre>
 
 <p>And if no errors, you have OpenCV installed!</p>
