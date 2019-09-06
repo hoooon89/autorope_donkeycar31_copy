@@ -232,9 +232,9 @@
 </ol>
 <h2 id="step-2-setup-the-wifi-for-first-boot">Step 2: Setup the WiFi for first boot</h2>
 <p>We can create a special file which will be used to login to wifi on first boot. More reading <a href="https://raspberrypi.stackexchange.com/questions/10251/prepare-sd-card-for-wifi-on-headless-pi">here</a>, but we will walk you through it. </p>
-<p>On Windows, with your memory card image burned and memory disc still inserted, you should see two drives, which are actually two partitions on the mem disc. One is labeled <strong>boot</strong>. On Mac and Linux, you should also have access to the <strong>boot</strong> partition of the mem disc. This is formated with the common FAT type and is where we will edit some files to help it find and log-on to your wifi on it's first boot. </p>
+<p>On Windows, with your memory card image burned and memory disc still inserted, you should see two drives, which are actually two partitions on the mem disc. One is labeled <strong>boot</strong>. On Mac and Linux, you should also have access to the <strong>boot</strong> partition of the mem disc. This is formatted with the common FAT type and is where we will edit some files to help it find and log-on to your wifi on its first boot. </p>
 <blockquote>
-<p>Note: If <strong>boot</strong> is not visible right away, try unplugging and re-insterting the memory card reader.</p>
+<p>Note: If <strong>boot</strong> is not visible right away, try unplugging and re-inserting the memory card reader.</p>
 </blockquote>
 <ul>
 <li>Start a text editor: <code>gedit</code> on Linux. Notepad++ on Windows. TextEdit on a Mac.</li>
@@ -272,11 +272,11 @@ sudo vi /media/userID/UUID/etc/hosts
 
 <h2 id="step-4-enable-ssh-on-boot">Step 4: Enable SSH on Boot</h2>
 <p>Put a file named <strong>ssh</strong> in the root of your <strong>boot</strong> partition.</p>
-<p>Now you're SD card is ready. Eject it from your computer, put it in the Pi 
+<p>Now your SD card is ready. Eject it from your computer, put it in the Pi 
 and plug in the Pi.</p>
 <h2 id="step-5-connecting-to-the-pi">Step 5: Connecting to the Pi</h2>
-<p>If you followed the above instructions to add wifi access you're Pi should
-now be connected to your wifi network. Now you need to find it's IP address
+<p>If you followed the above instructions to add wifi access, your Pi should
+now be connected to your wifi network. Now you need to find its IP address
 so you can connect to it via SSH. </p>
 <p>The easiest way (on Ubuntu) is to use the <code>findcar</code> donkey command. You can try <code>ping raspberrypi.local</code>. If you've modified the hostname, then you should try: <code>ping &lt;your hostname&gt;.local</code>. This will fail on a windows machine. Windows users will need the full IP address (unless using cygwin). </p>
 <p>If you are having troubles locating your Pi on the network, you will want to plug in an HDMI monitor and USB keyboard into the Pi. Boot it. Login with:</p>
