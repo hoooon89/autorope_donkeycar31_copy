@@ -136,7 +136,7 @@
         
             <li><a class="toctree-l4" href="#keras-3d">Keras 3D</a></li>
         
-            <li><a class="toctree-l4" href="#keras-bahavior">Keras Bahavior</a></li>
+            <li><a class="toctree-l4" href="#keras-behavior">Keras Behavior</a></li>
         
             <li><a class="toctree-l4" href="#keras-localizer">Keras Localizer</a></li>
         
@@ -357,7 +357,7 @@ This gives our stateless model some additional information about the motion of t
 <p>Input: Image</p>
 <p>Network: 4 3D Convolution layers each followed by max pooling, followed by 2 dense layers, and driving controls.</p>
 <p>Output: One dense layer with two scalar outputs for steering and throttle.</p>
-<h2 id="keras-bahavior">Keras Bahavior</h2>
+<h2 id="keras-behavior">Keras Behavior</h2>
 <p>This model type is created with the --type=behavior. </p>
 <p>The KerasBehavioral pilot takes an image and a vector as input. The vector is one hot activated vector of commands. This vector might be of length two and have two states, one for left lane driving and one for right lane driving. Then during training one element of the vector is activated while the desired behavior is demonstrated. This vector is defined in myconfig.py BEHAVIOR_LIST. BEHAVIOR_LED_COLORS must match the same length and can be useful when showing the current state. TRAIN_BEHAVIORS must be set to True.</p>
 <h4 id="pros_6">Pros:</h4>
