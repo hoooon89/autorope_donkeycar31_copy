@@ -135,6 +135,12 @@ def collate_records(records, gen_records, opts):
         except:
             pass
 
+        try:
+            vel0 = float(json_data['enc/vel'])
+            sample['throttle'] = vel0
+        except:
+            pass
+
 
         sample['img_data'] = None
 

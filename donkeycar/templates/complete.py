@@ -117,6 +117,11 @@ def drive(cfg, model_path=None, use_joystick=False, model_type=None, camera_type
             raise(Exception("Unkown camera type: %s" % cfg.CAMERA_TYPE))
             
         V.add(cam, inputs=inputs, outputs=['cam/image_array'], threaded=threaded)
+
+    if cfg.HAVE_ODOM:
+        from donkeycar.parts.encoder import RotaryEncoder
+        enc = RotaryEncoder(mm_per_tick=cfg.MM_PER_TICK, pin=cfg.ODOM_PIN, poll_delay=cfg.ODOM_POLL_DELAY, debug=cfg.ODOM_DEBUG)
+        V.add(enc, outputs=['enc/dist', 'enc/vel', 'enc/delta_vel'], threaded=True)
         
     if use_joystick or cfg.USE_JOYSTICK_AS_DEFAULT:
         #modify max_throttle closer to 1.0 to have more power
@@ -374,15 +379,61 @@ def drive(cfg, model_path=None, use_joystick=False, model_type=None, camera_type
         V.add(DelayedTrigger(100), inputs=['modelfile/dirty'], outputs=['modelfile/reload'], run_condition="ai_running")
         V.add(TriggeredCallback(model_path, model_reload_cb), inputs=["modelfile/reload"], run_condition="ai_running")
 
-        outputs=['pilot/angle', 'pilot/throttle']
+        if cfg.HAVE_ODOM:
+            outputs=['pilot/angle', 'pilot/vel']
+        else:
+            outputs=['pilot/angle', 'pilot/throttle']
 
         if cfg.TRAIN_LOCALIZER:
             outputs.append("pilot/loc")
     
         V.add(kl, inputs=inputs, 
             outputs=outputs,
-            run_condition='run_pilot')            
+            run_condition='run_pilot') 
     
+    if cfg.HAVE_ODOM:
+
+        class PoleFilter(object):
+            def __init__(self, factor, initial_val=0.0):
+                self.factor = factor
+                self.last_val = initial_val
+
+            def run(self, val):
+                v = (val * self.factor) + (self.last_val * (1.0 - self.factor))
+                self.last_val = val
+                return v
+
+        class ThrottleVelControl(object):
+            '''
+            use the throttle to achieve the target vel
+            '''
+            def __init__(self, pid, max_throttle):
+                self.pid = pid
+                self.current_throttle = 0.0
+                self.max_throttle = max_throttle
+
+            def run(self, current_vel, target_vel, mode):
+                if mode != "local":
+                    return 0.0
+                target_vel = 1.0
+                err = target_vel - current_vel
+                alpha = self.pid.run(err)
+                print("current_vel", current_vel, "target_vel", target_vel)
+                print("err", err, 'alpha', alpha, "self.current_throttle", self.current_throttle )
+                self.current_throttle += alpha
+                if self.current_throttle > self.max_throttle:
+                    self.current_throttle = self.max_throttle
+                elif self.current_throttle < 0.0:
+                    self.current_throttle = 0.0
+                return self.current_throttle
+
+        # V.add(PoleFilter(factor=0.1), inputs=['enc/vel'], outputs=['enc/vel'])
+
+        pid = dk.parts.transform.PIDController(p=cfg.ODOM_PID_P, i=cfg.ODOM_PID_I, d=cfg.ODOM_PID_D)
+        thc = ThrottleVelControl(pid, max_throttle=cfg.JOYSTICK_MAX_THROTTLE)
+        V.add(thc, inputs=['enc/vel', 'pilot/vel', 'user/mode'], outputs=['pilot/throttle'], run_condition="ai_running")
+
+
     #Choose what inputs should change the car.
     class DriveMode:
         def run(self, mode, 
@@ -516,6 +567,10 @@ def drive(cfg, model_path=None, use_joystick=False, model_type=None, camera_type
         inputs += ['behavior/state', 'behavior/label', "behavior/one_hot_state_array"]
         types += ['int', 'str', 'vector']
     
+    if cfg.HAVE_ODOM:
+        inputs += ['enc/vel']
+        types += ['float']
+
     if cfg.HAVE_IMU:
         inputs += ['imu/acl_x', 'imu/acl_y', 'imu/acl_z',
             'imu/gyr_x', 'imu/gyr_y', 'imu/gyr_z']

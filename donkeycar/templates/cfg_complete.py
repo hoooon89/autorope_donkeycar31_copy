@@ -220,7 +220,7 @@ AI_LAUNCH_KEEP_ENABLED = False      # when False ( default) you will need to hit
 AI_THROTTLE_MULT = 1.0              # this multiplier will scale every throttle value for all output from NN models
 
 #Path following
-PATH_FILENAME = "donkey_path.pkl"   #the path will be saved to this filename
+PATH_FILENAME = "donkey_path.pkl"   # the path will be saved to this filename
 PATH_SCALE = 5.0                    # the path display will be scaled by this factor in the web page
 PATH_OFFSET = (0, 0)                # 255, 255 is the center of the map. This offset controls where the origin is displayed.
 PATH_MIN_DIST = 0.3                 # after travelling this distance (m), save a path point
@@ -230,3 +230,12 @@ PID_D = -0.2                        # differential mult for PID path follower
 PID_THROTTLE = 0.2                  # constant throttle value during path following
 SAVE_PATH_BTN = "cross"             # joystick button to save path
 RESET_ORIGIN_BTN = "triangle"       # joystick button to press to move car back to origin
+
+HAVE_ODOM = False                   # Do you have an odometer? Uses pi gpio instead
+MM_PER_TICK = 22.16                 # How much travel with a single tick, in mm
+ODOM_PIN = 36                       # Which GPIO board mode pin to use as input
+ODOM_DEBUG = False                  # Write out values on vel and distance as it runs
+ODOM_PID_P = -0.003                  # Odometry model chases the desired vel with this pid controller, this is the P term
+ODOM_PID_I = -0.0001                # Odometry model chases the desired vel with this pid controller, this is the I term
+ODOM_PID_D = 0.0                    # Odometry model chases the desired vel with this pid controller, this is the D term
+ODOM_POLL_DELAY = 0.1               # delay in the thread to poll the odometry            
