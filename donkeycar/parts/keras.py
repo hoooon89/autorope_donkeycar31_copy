@@ -159,7 +159,7 @@ class KerasLinear(KerasPilot):
 
     def compile(self):
         self.model.compile(optimizer=self.optimizer,
-                loss='mse')
+                loss='mse', loss_weights = [1.0, 100.0])
 
     def run(self, img_arr):
         img_arr = img_arr.reshape((1,) + img_arr.shape)
@@ -317,34 +317,48 @@ def default_categorical(input_shape=(120, 160, 3), roi_crop=(0, 0)):
 
 def default_n_linear(num_outputs, input_shape=(120, 160, 3), roi_crop=(0, 0)):
 
-    drop = 0.1
+    drop = 0.2
 
     #we now expect that cropping done elsewhere. we will adjust our expeected image size here:
     input_shape = adjust_input_shape(input_shape, roi_crop)
     
     img_in = Input(shape=input_shape, name='img_in')
     x = img_in
-    x = Convolution2D(24, (5,5), strides=(2,2), activation='relu', name="conv2d_1")(x)
+    x = Convolution2D(12, (7,7), strides=(2,2), activation='relu', name="conv2d_1")(x)
     x = Dropout(drop)(x)
-    x = Convolution2D(32, (5,5), strides=(2,2), activation='relu', name="conv2d_2")(x)
+
+    x = Convolution2D(16, (5,5), strides=(2,2), activation='relu', name="conv2d_2")(x)
     x = Dropout(drop)(x)
-    x = Convolution2D(64, (5,5), strides=(2,2), activation='relu', name="conv2d_3")(x)
+
+    x = Convolution2D(32, (5,5), strides=(2,2), activation='relu', name="conv2d_3")(x)
     x = Dropout(drop)(x)
-    x = Convolution2D(64, (3,3), strides=(1,1), activation='relu', name="conv2d_4")(x)
+
+    x = Convolution2D(32, (3,3), strides=(2,2), activation='relu', name="conv2d_4")(x)
     x = Dropout(drop)(x)
-    x = Convolution2D(64, (3,3), strides=(1,1), activation='relu', name="conv2d_5")(x)
+
+    x = Convolution2D(32, (3,3), strides=(1,1), activation='relu', name="conv2d_5")(x)
     x = Dropout(drop)(x)
     
     x = Flatten(name='flattened')(x)
-    x = Dense(100, activation='relu')(x)
-    x = Dropout(drop)(x)
-    x = Dense(50, activation='relu')(x)
-    x = Dropout(drop)(x)
+    
+    y = Dense(100, activation='relu')(x)
+    y = Dropout(drop)(y)
+    # y = Dense(100, activation='relu')(y)
+    # y = Dropout(drop)(y)
+    y = Dense(50, activation='relu')(y)
+    y = Dropout(drop)(y)
+
+    z = Dense(100, activation='relu')(x)
+    z = Dropout(drop)(z)
+    # z = Dense(100, activation='relu')(z)
+    # z = Dropout(drop)(z)
+    z = Dense(50, activation='relu')(z)
+    z = Dropout(drop)(z)
 
     outputs = []
     
-    for i in range(num_outputs):
-        outputs.append(Dense(1, activation='linear', name='n_outputs' + str(i))(x))
+    outputs.append(Dense(1, activation='linear', name='steering')(y))
+    outputs.append(Dense(1, activation='linear', name='throttle')(z))
         
     model = Model(inputs=[img_in], outputs=outputs)
     
