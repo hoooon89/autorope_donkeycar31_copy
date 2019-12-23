@@ -110,11 +110,22 @@ PI_PASSWD = "raspberry"             # password is optional. Only used from Windo
 PI_HOSTNAME = "raspberrypi.local"   # the network hostname or ip address
 PI_DONKEY_ROOT = "/home/pi/mycar"   # the location of the mycar dir on the pi. this will be used to help locate the final model destination.
 
-# Region of interst cropping
+# Region of interest cropping
 # only supported in Categorical and Linear models.
 # If these crops values are too large, they will cause the stride values to become negative and the model with not be valid.
 ROI_CROP_TOP = 0                    #the number of rows of pixels to ignore on the top of the image
 ROI_CROP_BOTTOM = 0                 #the number of rows of pixels to ignore on the bottom of the image
+
+# Region of interest masking
+#
+# Region mask is applied at train time and drive time with autopilot,
+# so it does NOT alter data gathered by human pilot.
+# it is applied AFTER any cropping, so polygons should be in the cropped space.
+# Region is only applied when using linear model or categorical model.
+#
+# array of closed integer polygons like [[(0, 95), (0, 120), (160, 120), (160, 95), (80, 45), (40, 45)]], or None
+ROI_REGION = None
+
 
 #Model transfer options
 #When copying weights during a model transfer operation, should we freeze a certain number of layers

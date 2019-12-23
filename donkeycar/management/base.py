@@ -9,6 +9,7 @@ import time
 
 import donkeycar as dk
 from donkeycar.parts.datastore import Tub
+from donkeycar.parts.cv import region_of_interest
 from donkeycar.utils import *
 from donkeycar.management.tub import TubManager
 from donkeycar.management.joystick_creator import CreateJoystick
@@ -393,7 +394,9 @@ class ShowCnnActivations(BaseCommand):
         image_path = os.path.expanduser(image_path)
 
         model = load_model(model_path)
-        image = load_scaled_image_arr(image_path, cfg)[None, ...]
+
+        roi_mask = region_of_interest((cfg.TARGET_H, cfg.TARGET_W, cfg.TARGET_D), cfg.ROI_REGION)
+        image = load_scaled_image_arr(image_path, cfg, roi_mask)[None, ...]
 
         conv_layer_names = self.get_conv_layers(model)
         input_layer = model.get_layer(name='img_in').input
@@ -464,6 +467,8 @@ class ShowPredictionPlots(BaseCommand):
             model_type = cfg.DEFAULT_MODEL_TYPE
         model.load(model_path)
 
+        roi_mask = region_of_interest((cfg.TARGET_H, cfg.TARGET_W, cfg.TARGET_D), cfg.ROI_REGION)
+
         records = gather_records(cfg, tub_paths)
         user_angles = []
         user_throttles = []
@@ -478,7 +483,7 @@ class ShowPredictionPlots(BaseCommand):
             with open(record_path, 'r') as fp:
                 record = json.load(fp)
             img_filename = os.path.join(tub_paths, record['cam/image_array'])
-            img = load_scaled_image_arr(img_filename, cfg)
+            img = load_scaled_image_arr(img_filename, cfg, roi_mask)
             user_angle = float(record["user/angle"])
             user_throttle = float(record["user/throttle"])
             pilot_angle, pilot_throttle = model.run(img)

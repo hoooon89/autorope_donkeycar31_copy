@@ -130,33 +130,61 @@ def img_crop(img_arr, top, bottom):
     return img_arr[top:end, ...]
 
 
-def normalize_and_crop(img_arr, cfg):
-    img_arr = img_arr.astype(np.float32) * one_byte_scale
+def normalize_and_crop(img_arr, cfg, roi_mask=None):
+    """
+    Crop, Mask and Normalize the given image byte array
+
+    parameters:
+        img_arr: image as numpy byte array
+        cfg: Config from load_config()
+        roi_mask: function to apply byte-wise AND mask to clear anything NOT in region of interest.
+                  Note that roi_mask is applied after cropping, so region should be in cropped coordinates.
+    return:
+        cropped and masked image as float array of pixels between 0.0 and 1.0
+    """
+    # crop top and/or bottom
     if cfg.ROI_CROP_TOP or cfg.ROI_CROP_BOTTOM:
         img_arr = img_crop(img_arr, cfg.ROI_CROP_TOP, cfg.ROI_CROP_BOTTOM)
         if len(img_arr.shape) == 2:
-            img_arrH = img_arr.shape[0]
-            img_arrW = img_arr.shape[1]
-            img_arr = img_arr.reshape(img_arrH, img_arrW, 1)
+            # if we only have height and width dimensions, include depth of 1
+            img_arr = img_arr.reshape(img_arr.shape[0], img_arr.shape[1], 1)
+
+    # clear anything not in region of interest
+    if roi_mask is not None:
+        img_arr = roi_mask(img_arr)
+
+    # normalize pixels to floats between 0.0 and 1.0
+    img_arr = img_arr.astype(np.float32) * one_byte_scale
     return img_arr
 
 
-def load_scaled_image_arr(filename, cfg):
-    '''
-    load an image from the filename, and use the cfg to resize if needed
-    also apply cropping and normalize
-    '''
+def load_scaled_image_arr(filename, cfg, roi_mask=None):
+    """
+    load an image from the filename and use the cfg to resize, crop and mask
+    then normalize pixel values of 0.0 to 1.0.
+
+    parameters:
+        filename (string): filepath to image to be loaded
+        cfg: Config from load_config()
+        roi_mask: function to apply byte-wise AND mask to clear anything NOT in region of interest.
+                  Note that roi_mask is applied after cropping, so region should be in cropped coordinates.
+    return:
+        cropped and masked image as float array of pixels between 0.0 and 1.0
+    """
     import donkeycar as dk
     try:
+        # load image from file and scale it to desired size.
         img = Image.open(filename)
         if img.height != cfg.IMAGE_H or img.width != cfg.IMAGE_W:
             img = img.resize((cfg.IMAGE_W, cfg.IMAGE_H))
         img_arr = np.array(img)
-        img_arr = normalize_and_crop(img_arr, cfg)
-        croppedImgH = img_arr.shape[0]
-        croppedImgW = img_arr.shape[1]
+
+        # crop, mask and normalize to pixels 0.0 to 1.0
+        img_arr = normalize_and_crop(img_arr, cfg, roi_mask)
+
+        # if we have an RBG image and want and greyscale image, then reshape
         if img_arr.shape[2] == 3 and cfg.IMAGE_DEPTH == 1:
-            img_arr = dk.utils.rgb2gray(img_arr).reshape(croppedImgH, croppedImgW, 1)
+            img_arr = dk.utils.rgb2gray(img_arr).reshape(img_arr.shape[0], img_arr.shape[1], 1)
     except Exception as e:
         print(e)
         print('failed to load image:', filename)

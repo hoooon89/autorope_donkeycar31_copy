@@ -21,6 +21,7 @@ import donkeycar as dk
 from donkeycar.parts.datastore import TubHandler
 from donkeycar.parts.controller import LocalWebController
 from donkeycar.parts.camera import PiCamera
+from donkeycar.parts.cv import region_of_interest
 from donkeycar.utils import *
 
 
@@ -67,15 +68,16 @@ def drive(cfg, model_path=None, model_type=None):
         from donkeycar.parts.sombrero import Sombrero
         s = Sombrero()
 
-    class ImgPrecondition():
+    class ImgPrecondition:
         '''
         precondition camera image for inference
+        normalize, crop and mask
         '''
         def __init__(self, cfg):
-            self.cfg = cfg
+            self.roi_mask = region_of_interest((cfg.TARGET_H, cfg.TARGET_W, cfg.TARGET_D), cfg.ROI_REGION)
 
         def run(self, img_arr):
-            return normalize_and_crop(img_arr, self.cfg)
+            return normalize_and_crop(img_arr, self.cfg, self.roi_mask)
 
     V.add(ImgPrecondition(cfg),
         inputs=['cam/image_array'],

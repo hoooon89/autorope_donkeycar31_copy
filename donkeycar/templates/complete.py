@@ -20,6 +20,7 @@ from docopt import docopt
 import numpy as np
 
 import donkeycar as dk
+from donkeycar.parts.cv import region_of_interest
 
 #import parts
 from donkeycar.parts.transform import Lambda, TriggeredCallback, DelayedTrigger
@@ -267,16 +268,17 @@ def drive(cfg, model_path=None, use_joystick=False, model_type=None, camera_type
         V.add(imu, outputs=['imu/acl_x', 'imu/acl_y', 'imu/acl_z',
             'imu/gyr_x', 'imu/gyr_y', 'imu/gyr_z'], threaded=True)
 
-    class ImgPreProcess():
+    class ImgPreProcess:
         '''
         preprocess camera image for inference.
-        normalize and crop if needed.
+        normalize, crop and mask if needed.
         '''
         def __init__(self, cfg):
             self.cfg = cfg
+            self.roi_mask = region_of_interest((cfg.TARGET_H, cfg.TARGET_W, cfg.TARGET_D), cfg.ROI_REGION)
 
         def run(self, img_arr):
-            return normalize_and_crop(img_arr, self.cfg)
+            return normalize_and_crop(img_arr, self.cfg, self.roi_mask)
 
     if "coral" in model_type:
         inf_input = 'cam/image_array'

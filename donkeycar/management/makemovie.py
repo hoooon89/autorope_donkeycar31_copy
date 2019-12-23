@@ -13,6 +13,7 @@ except:
 
 import donkeycar as dk
 from donkeycar.parts.datastore import Tub
+from donkeycar.parts.cv import region_of_interest
 from donkeycar.utils import *
 
 
@@ -65,6 +66,7 @@ class MakeMovie(object):
             self.keras_part.compile()
             if args.salient:
                 self.do_salient = self.init_salient(self.keras_part.model)
+        self.roi_mask = region_of_interest((self.cfg.TARGET_H, self.cfg.TARGET_W, self.cfg.TARGET_D), self.cfg.ROI_REGION)
 
         print('making movie', args.out, 'from', num_frames, 'images')
         clip = mpy.VideoClip(self.make_frame,
@@ -105,14 +107,15 @@ class MakeMovie(object):
             return
 
         import cv2
-         
+
         expected = self.keras_part.model.inputs[0].shape[1:]
         actual = img.shape
 
         # normalize image before prediction
-        pred_img = img.astype(np.float32) / 255.0
+        pred_img = self.roi_mask(img)  # apply region of interest mask before prediction
+        pred_img = pred_img.astype(np.float32) / 255.0
 
-        # check input depth
+        # check input image depth, make it match the model's expected input shape
         if expected[2] == 1 and actual[2] == 3:
             pred_img = rgb2gray(pred_img)
             pred_img = pred_img.reshape(pred_img.shape + (1,))
@@ -149,7 +152,8 @@ class MakeMovie(object):
 
         import cv2
 
-        pred_img = img.reshape((1,) + img.shape)
+        pred_img = self.roi_mask(img)  # apply region of interest mask before prediction
+        pred_img = pred_img.reshape((1,) + pred_img.shape)  # TODO: ask @Tawn; what is this doing and why? (1,) + (120, 160, 3) = (1, 120, 160, 3)
         angle_binned, _ = self.keras_part.model.predict(pred_img)
 
         x = 4
@@ -214,7 +218,7 @@ class MakeMovie(object):
         # check input depth
         if expected[2] == 1 and actual[2] == 3:
             pred_img = rgb2gray(pred_img)
-            pred_img = pred_img.reshape(pred_img.shape + (1,))
+            pred_img = pred_img.reshape(pred_img.shape + (1,))  # TODO: ask @Tawn; what is this doing and why? (120, 160, 3) + (1,) = (120, 160, 3, 1)
 
         salient_mask = self.compute_visualisation_mask(pred_img)
         z = np.zeros_like(salient_mask)
@@ -248,8 +252,8 @@ class MakeMovie(object):
         
         self.draw_user_input(rec, image)
         if self.keras_part is not None:
-            self.draw_model_prediction(rec, image)
-            self.draw_steering_distribution(rec, image)
+            self.draw_model_prediction(rec, image)      # TODO: check with @Tawn: isn't this going to do predition with image that has salient drawn on it?
+            self.draw_steering_distribution(rec, image) # TODO: check with @Tawn: isn't this going to do prediction with image with throttle and steering on it?
 
         if self.scale != 1:
             import cv2

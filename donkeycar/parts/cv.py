@@ -131,6 +131,85 @@ class ImgGaussianBlur():
         pass
 
 
+def region_of_interest(shape=(120, 160, 3), roi_region=None):
+    '''
+    Create a function to apply a region of interest mask to an image.
+    The pixels that fall within the region are conserved,
+    the pixels outside the region are cleared.
+
+    parameters:
+        shape: shape of image's numpy array (height, width, depth)
+        roi_region: array of closed polygons, like [[(0, 95), (0, 120), (160, 120), (160, 95), (80, 45), (40, 45)]]
+                    Each polygon is an array of 2D integer vertices.
+                    Each polygon is closed by automatically connecting the last vertex  to the first vertex.
+    returns:
+        A lambda function that applies region of interest mask to an image and return masked image
+    '''
+    if roi_region is None:
+        return lambda x: x      # identity function if no region
+
+    # function to apply mask to clear region
+    mask = np.zeros(shape, dtype=np.uint8)
+    cv2.fillPoly(mask, np.array(roi_region), 255)
+    return lambda x: cv2.bitwise_and(x, mask)
+
+
+class ImgRegionOfInterest:
+    '''
+    A part that conserves pixels in the given region and clears pixels outside of region.
+    The region is specified as an array of polygons.  Each polygon is an array of vertices;
+    the polygon is always closed by connecting the last vertex with the first vertex.
+    '''
+
+    def __init__(self, shape, region):
+        '''
+            Create a mask with region and apply to img_arr
+            parameters:
+                shape: shape of images to be masked (height, width, depth)
+                region: array of closed polygons, like [[(0, 95), (0, 120), (160, 120), (160, 95), (80, 45), (40, 45)]]
+                        Each polygon is an array of 2D integer vertices.
+                        Each polygon is closed by automatically connecting the last vertex  to the first vertex.
+        '''
+        self.region_mask = region_of_interest(shape, region)
+
+    def run(self, img_arr):
+        '''
+            Apply region mask to img_arr, save back to img_arr
+            NOTE that this caches the region mask and so presumes
+                 that all images are the same dimensions
+
+            parameters:
+                img_arr: numpy array that represents an image
+            returns:
+                numpy array representing the masked image.
+                If there is no region, the original image is returned.
+        '''
+        if img_arr is None:
+            return None
+        try:
+            if self.region_mask is not None:
+                #
+                # mask the image
+                #
+                masked_image = self.region_mask(img_arr)
+
+            else:
+                #
+                # no region, just return the original image
+                #
+                masked_image = img_arr
+
+                # plt.imshow(masked_image)
+                # plt.show() # show in a window (until window is closed)
+
+            return masked_image
+        except:
+            return img_arr
+
+    def shutdown(self):
+        pass
+
+
 class ArrowKeyboardControls:
     '''
     kind of sucky control, only one press active at a time. 

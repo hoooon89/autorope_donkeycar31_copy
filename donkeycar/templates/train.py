@@ -38,6 +38,7 @@ from donkeycar.parts.keras import KerasLinear, KerasIMU,\
      KerasCategorical, KerasBehavioral, Keras3D_CNN,\
      KerasRNN_LSTM, KerasLatent, KerasLocalizer
 from donkeycar.parts.augment import augment_image
+from donkeycar.parts.cv import region_of_interest
 from donkeycar.utils import *
 
 figure_format = 'png'
@@ -349,6 +350,8 @@ def train(cfg, tub_names, model_name, transfer_model, model_type, continuous, au
     opts['continuous'] = continuous
     opts['model_type'] = model_type
 
+    roi_mask = region_of_interest((cfg.TARGET_H, cfg.TARGET_W, cfg.TARGET_D), cfg.ROI_REGION)
+
     extract_data_from_pickles(cfg, tub_names)
 
     records = gather_records(cfg, tub_names, opts, verbose=True)
@@ -438,14 +441,16 @@ def train(cfg, tub_names, model_name, transfer_model, model_type, continuous, au
                         #get image data if we don't already have it
                         if record['img_data'] is None:
                             filename = record['image_path']
-                            
-                            img_arr = load_scaled_image_arr(filename, cfg)
+
+                            # load, scale, normalize and crop image
+                            img_arr = load_scaled_image_arr(filename, cfg, roi_mask)
 
                             if img_arr is None:
                                 break
-                            
+
+                            # apply image augmentation to cropped image
                             if aug:
-                                img_arr = augment_image(img_arr)
+                                img_arr = augment_image(img_arr, roi_mask)
 
                             if cfg.CACHE_IMAGES:
                                 record['img_data'] = img_arr
@@ -653,6 +658,7 @@ def go_train(kl, cfg, train_gen, val_gen, gen_records, model_name, steps_per_epo
 
             #a generator function to help train the quantizer with the expected range of data from inputs
             def representative_dataset_gen():
+                roi_mask = region_of_interest((cfg.TARGET_H, cfg.TARGET_W, cfg.TARGET_D), cfg.ROI_REGION)
                 start = 0
                 end = stride
                 for _ in range(num_calibration_steps):
@@ -661,7 +667,7 @@ def go_train(kl, cfg, train_gen, val_gen, gen_records, model_name, steps_per_epo
                 
                     for record in batch_data:
                         filename = record['image_path']                        
-                        img_arr = load_scaled_image_arr(filename, cfg)
+                        img_arr = load_scaled_image_arr(filename, cfg, roi_mask)
                         inputs.append(img_arr)
 
                     start += stride
@@ -745,6 +751,7 @@ class SequencePredictionGenerator(keras.utils.Sequence):
         self.n = int(len(data) * cfg.PRUNE_EVAL_PERCENT_OF_DATASET)
         self.data = data[:self.n]
         self.batch_size = cfg.BATCH_SIZE
+        self.roi_mask = region_of_interest((cfg.TARGET_H, cfg.TARGET_W, cfg.TARGET_D), cfg.ROI_REGION)
         self.cfg = cfg
 
     def __len__(self):
@@ -756,7 +763,7 @@ class SequencePredictionGenerator(keras.utils.Sequence):
         images = []
         for data in batch_data:
             path = data['image_path']
-            img_arr = load_scaled_image_arr(path, self.cfg)
+            img_arr = load_scaled_image_arr(path, self.cfg, self.roi_mask)
             images.append(img_arr)
 
         return np.array(images), np.array([])
@@ -776,6 +783,9 @@ def sequence_train(cfg, tub_names, model_name, transfer_model, model_type, conti
     tubs = gather_tubs(cfg, tub_names)
     
     verbose = cfg.VERBOSE_TRAIN
+
+    # function to apply region of interest mask to scaled and cropped images
+    roi_mask = region_of_interest((cfg.TARGET_H, cfg.TARGET_W, cfg.TARGET_D), cfg.ROI_REGION)
 
     records = []
 
@@ -885,12 +895,15 @@ def sequence_train(cfg, tub_names, model_name, transfer_model, model_type, conti
                         #get image data if we don't already have it
                         if len(inputs_img) < num_images_target:
                             if record['img_data'] is None:
-                                img_arr = load_scaled_image_arr(record['image_path'], cfg)
+                                # load, scale, normalize and crop image
+                                img_arr = load_scaled_image_arr(record['image_path'], cfg, roi_mask)
                                 if img_arr is None:
                                     break
+
+                                # apply data augmentation to image
                                 if aug:
-                                    img_arr = augment_image(img_arr)
-                                
+                                    img_arr = augment_image(img_arr, roi_mask)
+
                                 if cfg.CACHE_IMAGES:
                                     record['img_data'] = img_arr
                             else:

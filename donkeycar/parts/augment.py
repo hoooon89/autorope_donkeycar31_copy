@@ -36,11 +36,22 @@ def rand_persp_transform(img):
 
     return img.transform((width, height), Image.PERSPECTIVE, coeffs, Image.BICUBIC)
 
-def augment_image(np_img, shadow_images=None, do_warp_persp=False):
-    conv_img = np_img * 255.0
-    conv_img = conv_img.astype(np.uint8)
-    img = Image.fromarray(conv_img)
-    #change the coloration, sharpness, and composite a shadow
+
+def augment_byte_image(img, shadow_images=None, do_warp_persp=False, roi_mask=None):
+    """
+    Augment the given byte array image; modifies brightness, contrast, sharpness, color.
+    Optionally applies random shadows and/or warps perspective.
+    Note: roi_mask is in cropped coordinates, so input img should have cropping applied already.
+
+    parameters:
+        img: byte array image (NOT floating point pixels); cropping already applied
+        shadow_image: array of shadow images to apply from load_shadow_images
+        do_warp_persp (boolean): if True, then warp the image perspective.
+        roi_mask: function to apply AND mask to clear pixels NOT in region of interest
+    return:
+        augmented by byte array image.  Original image is not affected.
+    """
+    # change the coloration, sharpness, and composite a shadow
     factor = random.uniform(0.5, 2.0)
     img = ImageEnhance.Brightness(img).enhance(factor)
     factor = random.uniform(0.5, 1.0)
@@ -52,7 +63,7 @@ def augment_image(np_img, shadow_images=None, do_warp_persp=False):
 
     if shadow_images is not None:
         '''
-        optionaly composite a shadow, perpared from load_shadow_images
+        optionally composite a shadow, prepared from load_shadow_images
         '''
         iShad = random.randrange(0, len(shadow_images))
         top, mask = shadow_images[iShad]
@@ -62,13 +73,43 @@ def augment_image(np_img, shadow_images=None, do_warp_persp=False):
         mask = ImageEnhance.Brightness(mask).enhance(random.uniform(0.3, 1.0))
         offset = (random.randrange(-128, 128), random.randrange(-128, 128))
         img.paste(top, offset, mask)
-    
+
     if do_warp_persp:
         '''
-        optionaly warp perspective
+        optionally warp perspective
         '''
         img = rand_persp_transform(img)
 
+    # apply region of image if mask is provided
+    if roi_mask is not None:
+        img = roi_mask(img)
+
+    return img
+
+
+def augment_image(np_img, shadow_images=None, do_warp_persp=False, roi_mask=None):
+    """
+    Augment the given float array image; modifies brightness, contrast, sharpness, color.
+    Optionally applies random shadows and/or warps perspective.
+    Note: roi_mask is in cropped coordinates, so input img should have cropping applied already.
+
+    parameters:
+        img: float array image of normalized pixels with values 0.0 to 1.0, cropping already applied
+        shadow_image: array of shadow images to apply from load_shadow_images
+        do_warp_persp (boolean): if True, then warp the image perspective.
+        roi_mask: function to apply AND mask to clear pixels NOT in region of interest
+    return:
+        augmented by float array image.  Original image is not affected.
+    """
+    # convert float array image to byte array image
+    conv_img = np_img * 255.0
+    conv_img = conv_img.astype(np.uint8)
+    img = Image.fromarray(conv_img)
+
+    # augment the byte array image
+    img = augment_byte_image(img, shadow_images, do_warp_persp, roi_mask)
+
+    # convert back to a float array image
     return np.array(img).astype(np.float) / 255.0
 
 def load_shadow_images(path_mask):
