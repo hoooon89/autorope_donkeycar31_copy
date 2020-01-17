@@ -171,6 +171,11 @@
     <a class="" href="../../../faq/">FAQ</a>
 	    </li>
           
+            <li class="toctree-l1">
+		
+    <a class="" href="../../../legacy/">Legacy</a>
+	    </li>
+          
         </ul>
       </div>
       &nbsp;
@@ -222,14 +227,14 @@
 <p>Change to a dir you would like to use as the head of your projects.</p>
 </li>
 </ul>
-<pre><code>mkdir projects
+<pre><code class="bash">mkdir projects
 cd projects
 </code></pre>
 
 <ul>
 <li>Get the latest donkey from Github.</li>
 </ul>
-<pre><code>git clone https://github.com/autorope/donkeycar
+<pre><code class="bash">git clone https://github.com/autorope/donkeycar
 cd donkeycar
 git checkout master
 </code></pre>
@@ -237,29 +242,29 @@ git checkout master
 <ul>
 <li>If this is not your first install, update Conda and remove old donkey</li>
 </ul>
-<pre><code>conda update -n base -c defaults conda
+<pre><code class="bash">conda update -n base -c defaults conda
 conda env remove -n donkey
 </code></pre>
 
 <ul>
 <li>Create the Python anaconda environment</li>
 </ul>
-<pre><code>conda env create -f install\envs\windows.yml
+<pre><code class="bash">conda env create -f install\envs\windows.yml
 conda activate donkey
 pip install -e .[pc]
 </code></pre>
 
 <ul>
-<li>Optionally Install Tensorflow GPU</li>
+<li>Optionally Install Tensorflow GPU - only for NVidia Graphics cards</li>
 </ul>
 <p>If you have an NVidia card, you should update to the lastest drivers and <a href="https://www.tensorflow.org/install/gpu#windows_setup">install Cuda SDK</a>. </p>
-<pre><code>conda install tensorflow-gpu==1.13.1
+<pre><code class="bash">conda install tensorflow-gpu==1.13.1
 </code></pre>
 
 <ul>
 <li>Create your local working dir:</li>
 </ul>
-<pre><code>donkey createcar --path ~/mycar
+<pre><code class="bash">donkey createcar --path ~/mycar
 </code></pre>
 
 <blockquote>

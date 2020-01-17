@@ -171,6 +171,11 @@
     <a class="" href="../../../faq/">FAQ</a>
 	    </li>
           
+            <li class="toctree-l1">
+		
+    <a class="" href="../../../legacy/">Legacy</a>
+	    </li>
+          
         </ul>
       </div>
       &nbsp;
@@ -293,7 +298,7 @@ mv opencv_contrib-4.1.0 opencv_contrib
 
 <p>Let's get our virtual environment (<code>env</code>) ready for OpenCV.</p>
 <pre><code class="bash"># Install Numpy
-pip install numpy
+pip install numpy==1.16.4
 </code></pre>
 
 <p>Now let's setup <code>CMake</code> correctly so it generates the correct OpenCV bindings for our virtual environment.</p>
@@ -346,7 +351,7 @@ ln -s /usr/local/lib/python3.6/site-packages/cv2/python-3.6/cv2.so cv2.so
 </code></pre>
 
 <p>You should see something that looks like</p>
-<pre><code>total 48
+<pre><code class="text">total 48
 drwxr-xr-x 10 user user 4096 Jun 16 13:03 .
 drwxr-xr-x  5 user user 4096 Jun 16 07:46 ..
 lrwxrwxrwx  1 user user   60 Jun 16 13:03 cv2.so -&gt; /usr/local/lib/python3.6/site-packages/cv2/python-3.6/cv2.so
@@ -372,7 +377,7 @@ print(cv2.__version__)
 <ul>
 <li>Change to a dir you would like to use as the head of your projects.</li>
 </ul>
-<pre><code>cd ~/projects
+<pre><code class="bash">cd ~/projects
 </code></pre>
 
 <ul>

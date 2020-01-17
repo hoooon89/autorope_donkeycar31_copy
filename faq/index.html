@@ -183,7 +183,7 @@
         
             <li><a class="toctree-l3" href="#will-donkey-work-on-different-hardware">Will Donkey Work on different hardware?</a></li>
         
-            <li><a class="toctree-l3" href="#after-a-reboot-i-dont-see-the-donkey-in-front-of-the-prompt-and-i-get-python-errors-when-i-run">After a reboot, I don't see the (donkey) in front of the prompt, and I get python errors when I run.</a></li>
+            <li><a class="toctree-l3" href="#after-a-reboot-i-dont-see-the-donkey-in-front-of-the-prompt-and-i-get-python-errors-when-i-run">After a reboot, I don't see the (donkey) in front of the prompt, and I get python errors when I run</a></li>
         
             <li><a class="toctree-l3" href="#how-to-get-latest-donkey-source">How to get latest Donkey source</a></li>
         
@@ -191,6 +191,11 @@
     
 
     </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../legacy/">Legacy</a>
 	    </li>
           
         </ul>
@@ -229,12 +234,11 @@
             <div class="section">
               
                 <h1 id="faq">FAQ</h1>
-<hr />
 <h3 id="what-types-of-rc-cars-work-with-the-donkey-platform">What types of RC cars work with the donkey platform?</h3>
 <p>Most hobby grade RC cars will work fine with the electronics but you'll need to make your own baseplate and camera
 holder. To make sure the car will work with Donkey check theses things.</p>
 <ul>
-<li>it has a separate ESC and reciever. Some of the cheaper cars have these combined so it would require soldering to
+<li>it has a separate ESC and receiver. Some of the cheaper cars have these combined so it would require soldering to
 connect the Donkey motor controller to the ESC.</li>
 <li>The ESC uses three-wire connectors. This will make it easy to just plug into the Donkey hardware.</li>
 <li>Brushed motors are easier because they can go slower but brushless motors can work as well.</li>
@@ -244,49 +248,56 @@ connect the Donkey motor controller to the ESC.</li>
 <p>The easiest thing to do would be to take your parts down to your local RC / hobby shop and check that the car you want
 works with the parts. Here are some parts people have said work in other countries.</p>
 <ul>
-<li>Austrailia: <a href="https://www.hobbywarehouse.com.au/hsp-94186-18694k-kaos-blue-rc-truck.html">KAOS</a> (functionally equivalent to the Exceed Magnet)</li>
+<li>Australia: <a href="https://www.hobbywarehouse.com.au/hsp-94186-18694k-kaos-blue-rc-truck.html">KAOS</a> (functionally equivalent to the Exceed Magnet)</li>
 <li>China: <a href="https://item.taobao.com/item.htm?spm=a1z02.1.2016030118.d2016038.314a2de7XhDszO&amp;id=27037536775&amp;scm=1007.10157.81291.100200300000000&amp;pvid=dd956496-2837-41c8-be44-ecbcf48f1eac">HSP 94186</a> (functionally equivalent to the Exceed Magnet)</li>
 <li>Add your country to this list (click edit this in top left corner)</li>
 </ul>
 <h3 id="how-can-i-make-my-own-track">How can I make my own track?</h3>
 <p>You can use tape, ribbon or even rope. The most popular tracks are 4ft wide and have 2in white borders with a dashed
-yellow center line. The Oakland track is about 70 feet around the center line. Key race characteristics include:
-* straightaways.
-* left and right turns
-* hairpin turn
-* start/finish line.</p>
+yellow center line. The Oakland track is about 70 feet around the center line. Key race characteristics include:</p>
+<ul>
+<li>straightaways.</li>
+<li>left and right turns</li>
+<li>hairpin turn</li>
+<li>start/finish line.</li>
+</ul>
 <h3 id="will-donkey-work-on-different-hardware">Will Donkey Work on different hardware?</h3>
 <p>Yes. It's all python so you can run it on any system. Usually the hard part of porting Donkey will be getting the hardware working.
 Here are a couple systems that people have tried or talked about.</p>
 <ul>
 <li>
-<p>NVIDA TX2 - This was implemented with a webcam and used a teensy to controll the motor/servos. I2c control of PCA9685 works as well.</p>
+<p>NVIDA TX2 - This was implemented with a webcam and used a teensy to control the motor/servos. I2c control of PCA9685 works as well.</p>
 </li>
 <li>
 <p>Pi-Zero - Yes, Try following the steps for the PiB/B+. They should work for the PiZero.</p>
 </li>
 </ul>
-<hr />
-<h2 id="after-a-reboot-i-dont-see-the-donkey-in-front-of-the-prompt-and-i-get-python-errors-when-i-run">After a reboot, I don't see the (donkey) in front of the prompt, and I get python errors when I run.</h2>
+<h2 id="after-a-reboot-i-dont-see-the-donkey-in-front-of-the-prompt-and-i-get-python-errors-when-i-run">After a reboot, I don't see the (donkey) in front of the prompt, and I get python errors when I run</h2>
 <ol>
-<li>If you used this disc setup guide above, you used conda to manage your virtual environment. You need to activate the donkey conda environment with:
-    <code>conda activate donkey</code></li>
-<li>optionally you can add that line to the last line of your ~/.bashrc to have it active each time you login.</li>
+<li>If you used this disc setup guide above, you used conda to manage your virtual environment. You need to activate the donkey conda environment with:</li>
 </ol>
-<hr />
+<pre><code class="bash">conda activate donkey
+</code></pre>
+
+<ol>
+<li>optionally you can add that line to the last line of your <code>~/.bashrc</code> to have it active each time you login.</li>
+</ol>
 <h2 id="how-to-get-latest-donkey-source">How to get latest Donkey source</h2>
 <ol>
-<li>When donkey has changed you can get the latest source. You've installed it directly from the github repo, so getting latest is easy:
-     <code>cd donkeycar
-    git pull origin master
-    donkey createcar --path ~/mycar --overwrite</code></li>
+<li>When donkey has changed you can get the latest source. You've installed it directly from the github repo, so getting latest is easy:</li>
 </ol>
+<pre><code class="bash">cd donkeycar
+git pull origin master
+donkey createcar --path ~/mycar --overwrite
+</code></pre>
               
             </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../legacy/" class="btn btn-neutral float-right" title="Legacy">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../release/" class="btn btn-neutral" title="Releases"><span class="icon icon-circle-arrow-left"></span> Previous</a>
@@ -319,6 +330,8 @@ Here are a couple systems that people have tried or talked about.</p>
       
         <span><a href="../release/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
+      
+        <span style="margin-left: 15px"><a href="../legacy/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

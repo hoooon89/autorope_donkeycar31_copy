@@ -89,13 +89,13 @@
     
         <ul>
         
-            <li><a class="toctree-l4" href="#how-to-adjust-your-cars-settings">How to adjust your car's settings.</a></li>
+            <li><a class="toctree-l4" href="#how-to-adjust-your-cars-settings">How to adjust your car's settings</a></li>
         
             <li><a class="toctree-l4" href="#steering-calibration">Steering Calibration</a></li>
         
             <li><a class="toctree-l4" href="#throttle-calibration">Throttle Calibration</a></li>
         
-            <li><a class="toctree-l4" href="#fine-tuning-your-calibration">Fine tuning your calibration.</a></li>
+            <li><a class="toctree-l4" href="#fine-tuning-your-calibration">Fine tuning your calibration</a></li>
         
         </ul>
     
@@ -189,6 +189,11 @@
     <a class="" href="../../faq/">FAQ</a>
 	    </li>
           
+            <li class="toctree-l1">
+		
+    <a class="" href="../../legacy/">Legacy</a>
+	    </li>
+          
         </ul>
       </div>
       &nbsp;
@@ -229,8 +234,8 @@
             <div class="section">
               
                 <h1 id="calibrate-your-car">Calibrate your Car</h1>
-<p>The point of calibrating your car is to make it drive consitently.</p>
-<h2 id="how-to-adjust-your-cars-settings">How to adjust your car's settings.</h2>
+<p>The point of calibrating your car is to make it drive consistently.</p>
+<h2 id="how-to-adjust-your-cars-settings">How to adjust your car's settings</h2>
 <blockquote>
 <p>You will need to ssh into your Pi to do the calibration.</p>
 </blockquote>
@@ -286,7 +291,7 @@ the throttle_controller part:</p>
 <li><code>THROTTLE_STOPPED_PWM</code> = PWM value for zero throttle</li>
 <li><code>THROTTLE_REVERSE_PWM</code> = PWM value at full reverse throttle</li>
 </ul>
-<h2 id="fine-tuning-your-calibration">Fine tuning your calibration.</h2>
+<h2 id="fine-tuning-your-calibration">Fine tuning your calibration</h2>
 <blockquote>
 <p>Note : optional</p>
 </blockquote>
@@ -295,7 +300,7 @@ the throttle_controller part:</p>
 verify that it drives as expected. Here's how to fine tune your car's calibration.</p>
 <ol>
 <li>Start your car by running <code>python manage.py drive</code>.</li>
-<li>Go to <code>&lt;your_cars_ip_address&gt;:8887</code> in a browser.</li>
+<li>Go to <code>&lt;your_cars_hostname.local&gt;:8887</code> in a browser.</li>
 <li>Press <code>j</code> until the cars steering is all the way right.</li>
 <li>Press <code>i</code> a couple times to get the car to go forward.</li>
 <li>Measure the diameter of the turn and record it on a spreadsheet.</li>
@@ -303,11 +308,13 @@ verify that it drives as expected. Here's how to fine tune your car's calibratio
 direction.</li>
 <li>Chart these so you can see if your car turns the same in each direction.</li>
 </ol>
-<p>Corrections
-* If your car turns the same amount at an 80% turn and a 100% turn, change the
-PWM setting for that turn direction to be the PWM value at 80%.
-* If your car is biased to turn one direction, change the PWM values of your turns
-in the opposite direction of the bias.</p>
+<p>Corrections:</p>
+<ul>
+<li>If your car turns the same amount at an 80% turn and a 100% turn, change the
+PWM setting for that turn direction to be the PWM value at 80%.</li>
+<li>If your car is biased to turn one direction, change the PWM values of your turns
+in the opposite direction of the bias.</li>
+</ul>
 <p>After you've fine tuned your car the steering chart should look something like
 this.</p>
 <p><img alt="calibration graph" src="../../assets/calibration_graph.png" /></p>

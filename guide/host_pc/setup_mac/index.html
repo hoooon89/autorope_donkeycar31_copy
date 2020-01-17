@@ -171,6 +171,11 @@
     <a class="" href="../../../faq/">FAQ</a>
 	    </li>
           
+            <li class="toctree-l1">
+		
+    <a class="" href="../../../legacy/">Legacy</a>
+	    </li>
+          
         </ul>
       </div>
       &nbsp;
@@ -222,14 +227,14 @@
 <p>Change to a dir you would like to use as the head of your projects.</p>
 </li>
 </ul>
-<pre><code>mkdir projects
+<pre><code class="bash">mkdir projects
 cd projects
 </code></pre>
 
 <ul>
 <li>Get the latest donkeycar from Github.</li>
 </ul>
-<pre><code>git clone https://github.com/autorope/donkeycar
+<pre><code class="bash">git clone https://github.com/autorope/donkeycar
 cd donkeycar
 git checkout master
 </code></pre>
@@ -237,14 +242,14 @@ git checkout master
 <ul>
 <li>If this is not your first install, update Conda and remove old donkey</li>
 </ul>
-<pre><code>conda update -n base -c defaults conda
+<pre><code class="bash">conda update -n base -c defaults conda
 conda env remove -n donkey
 </code></pre>
 
 <ul>
 <li>Create the Python anaconda environment</li>
 </ul>
-<pre><code>conda env create -f install/envs/mac.yml
+<pre><code class="bash">conda env create -f install/envs/mac.yml
 conda activate donkey
 pip install -e .[pc]
 </code></pre>
@@ -252,11 +257,11 @@ pip install -e .[pc]
 <ul>
 <li>Tensorflow GPU</li>
 </ul>
-<p>Currently there is no gpu support for <a href="https://www.tensorflow.org/install#install-tensorflow">tensorflow on mac</a>.</p>
+<p>Currently there is no NVidia gpu support for <a href="https://www.tensorflow.org/install#install-tensorflow">tensorflow on mac</a>.</p>
 <ul>
 <li>Create your local working dir:</li>
 </ul>
-<pre><code>donkey createcar --path ~/mycar
+<pre><code class="bash">donkey createcar --path ~/mycar
 </code></pre>
 
 <blockquote>

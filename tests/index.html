@@ -167,7 +167,7 @@
         
             <li><a class="toctree-l3" href="#run-all-the-tests">Run all the tests</a></li>
         
-            <li><a class="toctree-l3" href="#organization">Organization</a></li>
+            <li><a class="toctree-l3" href="#code-organization">Code Organization</a></li>
         
         </ul>
     
@@ -183,6 +183,11 @@
             <li class="toctree-l1">
 		
     <a class="" href="../faq/">FAQ</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../legacy/">Legacy</a>
 	    </li>
           
         </ul>
@@ -223,9 +228,17 @@
                 <h1 id="tests">Tests</h1>
 <p>There is a limited test suite to ensure that the your changes to the code
 don't break something unintended.</p>
-<h3 id="run-all-the-tests">Run all the tests</h3>
-<p><code>python -m unittest</code></p>
-<h3 id="organization">Organization</h3>
+<h2 id="run-all-the-tests">Run all the tests</h2>
+<p>Look into the <code>.travis.yml</code> for a more detailed commands used for tests:</p>
+<ul>
+<li><code>install</code> section is used to install required packages and setting up environment.</li>
+<li><code>script</code> section is actually used to run test suite</li>
+<li><code>jobs</code> section may contain another tasks related to other  things like tests
+ or deployments.</li>
+</ul>
+<p>Notice: in <code>.travis.yml</code> env var named <code>TRAVIS_PYTHON_VERSION</code> is populated from <code>python</code> section, such as <code>TRAVIS_PYTHON_VERSION=3.6</code>.</p>
+<p>Please refer to the <a href="https://docs.travis-ci.com/">travis documentation</a> for more details.</p>
+<h2 id="code-organization">Code Organization</h2>
 <p>The test code is in <code>tests</code> foders in the same folder as the code. This is to
 help keep the test code linked to the code its self. If you change the code,
 change the tests. :)</p>

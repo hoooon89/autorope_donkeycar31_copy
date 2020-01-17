@@ -185,6 +185,11 @@
     <a class="" href="../faq/">FAQ</a>
 	    </li>
           
+            <li class="toctree-l1">
+		
+    <a class="" href="../legacy/">Legacy</a>
+	    </li>
+          
         </ul>
       </div>
       &nbsp;
@@ -229,12 +234,22 @@
 <li>Pull the lastest donkeycar code.</li>
 <li>Make your changes.</li>
 <li>Move the disk back to your computer.</li>
-<li>Remove your wi-fi password and change the host name to donkeypi. Delete <code>.gitconfig</code>.</li>
+<li>Clean up :<ul>
+<li>Remove your wi-fi password</li>
+<li>Change the host name to <code>donkeypi</code></li>
+<li>Delete <code>.gitconfig</code>.</li>
+</ul>
+</li>
 <li>
 <p>Create the disk image from the SD card</p>
-<p>Run <code>sudo gparted</code> to see the size of the disk partitions. Resize the partitions
-to be as small as possible. Right click the partition to see the last sector of the partition.</p>
-<p>Run <code>sudo dd if=/dev/mmcblk0 of=~/donkey_2.5.0_pi3.img bs=512 count=&lt;last sector&gt; status=progress</code></p>
+<ul>
+<li>Run <code>sudo gparted</code> to see the size of the disk partitions.</li>
+<li>Resize the partitions to be as small as possible.</li>
+<li>Right click the partition to see the last sector of the partition.</li>
+<li>Run:</li>
+</ul>
+<p><code>bash
+sudo dd if=/dev/mmcblk0 of=~/donkey_2.5.0_pi3.img bs=512 count=&lt;last sector&gt; status=progress</code></p>
 </li>
 <li>
 <p>Zip the .img file and upload to Dropbox.</p>

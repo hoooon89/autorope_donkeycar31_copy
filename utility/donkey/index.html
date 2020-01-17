@@ -205,6 +205,11 @@
     <a class="" href="../../faq/">FAQ</a>
 	    </li>
           
+            <li class="toctree-l1">
+		
+    <a class="" href="../../legacy/">Legacy</a>
+	    </li>
+          
         </ul>
       </div>
       &nbsp;
@@ -255,7 +260,7 @@
 <ul>
 <li>This command may be run from any dir</li>
 <li>Run on the host computer or the robot</li>
-<li>It uses the <code>--path</code> as the destination dir to create. If <code>.py</code> files exist there, it will not overwrite them, unless the optional <code>--overwrite</code> is used. </li>
+<li>It uses the <code>--path</code> as the destination dir to create. If <code>.py</code> files exist there, it will not overwrite them, unless the optional <code>--overwrite</code> is used.</li>
 <li>The optional <code>--template</code> will specify the template file to start from. For a list of templates, see the <code>donkeycar/templates</code> dir. This source template will be copied over the <code>manage.py</code> for the user.</li>
 </ul>
 <h2 id="find-car">Find Car</h2>
@@ -309,8 +314,8 @@ See also <a href="/guide/calibrate/">more information.</a></p>
 <li>Optional argument to specify a different <code>config.py</code> other than default: <code>config.py</code></li>
 <li>Optional model argument will load the keras model and display prediction as lines on the movie</li>
 <li>model_type may optionally give a hint about what model type we are loading. Categorical is default.</li>
-<li>optional --salient will overlay a visualization of which pixels excited the NN the most</li>
-<li>optional --start and/or --end can specify a range of frame numbers to use.</li>
+<li>optional <code>--salient</code> will overlay a visualization of which pixels excited the NN the most</li>
+<li>optional <code>--start</code> and/or <code>--end</code> can specify a range of frame numbers to use.</li>
 <li>scale will cause ouput image to be scaled by this amount</li>
 </ul>
 <h2 id="check-tub">Check Tub</h2>
@@ -371,16 +376,16 @@ on the host that are deleted on the pi. This allows your PS3 Triangle edits to a
 <li>Run on the host computer</li>
 <li>First copy your public key to the pi so you don't need a password for each rsync:</li>
 </ul>
-<pre><code class="bash">cat ~/.ssh/id_rsa.pub | ssh pi@&lt;your pi ip&gt; 'cat &gt;&gt; .ssh/authorized_keys' 
+<pre><code class="bash">cat ~/.ssh/id_rsa.pub | ssh pi@&lt;your pi ip&gt; 'cat &gt;&gt; .ssh/authorized_keys'
 </code></pre>
 
 <ul>
 <li>If you don't have a id_rsa.pub then google how to make one</li>
-<li>Edit your config.py and make sure the fields PI_USERNAME, PI_HOSTNAME, PI_DONKEY_ROOT are setup. Only on windows, you need to set PI_PASSWD.</li>
+<li>Edit your config.py and make sure the fields <code>PI_USERNAME</code>, <code>PI_HOSTNAME</code>, <code>PI_DONKEY_ROOT</code> are setup. Only on windows, you need to set <code>PI_PASSWD</code>.</li>
 <li>This command may be run from <code>~/mycar</code> dir</li>
 </ul>
 <h2 id="continuous-train">Continuous Train</h2>
-<p>This command fires off the keras training in a mode where it will continuously look for new data at the end of every epoch. </p>
+<p>This command fires off the keras training in a mode where it will continuously look for new data at the end of every epoch.</p>
 <p>Usage:</p>
 <pre><code class="bash">donkey contrain [--tub=&lt;data_path&gt;] [--model=&lt;path to model&gt;] [--transfer=&lt;path to model&gt;] [--type=&lt;linear|categorical|rnn|imu|behavior|3d&gt;] [--aug]
 </code></pre>
@@ -390,20 +395,20 @@ on the host that are deleted on the pi. This allows your PS3 Triangle edits to a
 <li>Run on the host computer</li>
 <li>First copy your public key to the pi so you don't need a password for each rsync:</li>
 </ul>
-<pre><code class="bash">cat ~/.ssh/id_rsa.pub | ssh pi@&lt;your pi ip&gt; 'cat &gt;&gt; .ssh/authorized_keys' 
+<pre><code class="bash">cat ~/.ssh/id_rsa.pub | ssh pi@&lt;your pi ip&gt; 'cat &gt;&gt; .ssh/authorized_keys'
 </code></pre>
 
 <ul>
 <li>If you don't have a id_rsa.pub then google how to make one</li>
-<li>Edit your config.py and make sure the fields PI_USERNAME, PI_HOSTNAME, PI_DONKEY_ROOT are setup. Only on windows, you need to set PI_PASSWD.</li>
-<li>Optionally it can send the model file to your pi when it achieves a best loss. In config.py set SEND_BEST_MODEL_TO_PI = True.</li>
-<li>Your pi drive loop will autoload the weights file when it changes. This works best if car started with .json weights like:</li>
+<li>Edit your config.py and make sure the fields <code>PI_USERNAME</code>, <code>PI_HOSTNAME</code>, <code>PI_DONKEY_ROOT</code> are setup. Only on windows, you need to set <code>PI_PASSWD</code>.</li>
+<li>Optionally it can send the model file to your pi when it achieves a best loss. In config.py set <code>SEND_BEST_MODEL_TO_PI = True</code>.</li>
+<li>Your pi drive loop will autoload the weights file when it changes. This works best if car started with <code>.json</code> weights like:</li>
 </ul>
 <pre><code class="bash">python manage.py drive --model models/drive.json
 </code></pre>
 
 <h2 id="joystick-wizard">Joystick Wizard</h2>
-<p>This command line wizard will walk you through the steps to use your joystick. </p>
+<p>This command line wizard will walk you through the steps to use your joystick.</p>
 <p>Usage:</p>
 <pre><code class="bash">donkey createjs
 </code></pre>
@@ -412,17 +417,17 @@ on the host that are deleted on the pi. This allows your PS3 Triangle edits to a
 <li>This command may be run from <code>~/mycar</code> dir</li>
 <li>Run on the pi</li>
 <li>First make sure the OS can access your device. The utility <code>jstest</code> can be useful here. Installed via: <code>sudo apt install joystick</code></li>
-<li>Debian commonly creates the joystick device file at /dev/input/js0. If not, find out where.</li>
+<li>Debian commonly creates the joystick device file at <code>/dev/input/js0</code>. If not, find out where.</li>
 <li>Run the command <code>donkey createjs</code> and it will create a file, by default my_joystick.py. Drop that next to your manage.py</li>
 <li>Modify manage.py to replace:</li>
 </ul>
-<pre><code>    from donkeycar.parts.controller import get_js_controller
+<pre><code class="python">    from donkeycar.parts.controller import get_js_controller
 
     ctr = get_js_controller(cfg)
 </code></pre>
 
-<p>with </p>
-<pre><code>    from my_joystick import MyJoystickController
+<p>with</p>
+<pre><code class="python">    from my_joystick import MyJoystickController
 
     ctr = MyJoystickController(throttle_dir=cfg.JOYSTICK_THROTTLE_DIR,
                                 throttle_scale=cfg.JOYSTICK_MAX_THROTTLE,
@@ -433,7 +438,7 @@ on the host that are deleted on the pi. This allows your PS3 Triangle edits to a
 </code></pre>
 
 <h2 id="visualize-cnn-filter-activations">Visualize CNN filter activations</h2>
-<p>Shows feature maps of the provided image for each filter in each of the convolutional layers in the model provided. Debugging tool to visualize how well feature extraction is performing. </p>
+<p>Shows feature maps of the provided image for each filter in each of the convolutional layers in the model provided. Debugging tool to visualize how well feature extraction is performing.</p>
 <p>Usage:</p>
 <pre><code class="bash">donkey cnnactivations [--tub=&lt;data_path&gt;] [--model=&lt;path to model&gt;]
 </code></pre>

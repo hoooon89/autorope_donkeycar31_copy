@@ -89,28 +89,15 @@
     <a class="current" href="./">Get driving.</a>
     <ul class="subnav">
             
-    <li class="toctree-l3"><a href="#drive-your-car">Drive your car.</a></li>
+    <li class="toctree-l3"><a href="#drive-your-car">Drive your car</a></li>
     
         <ul>
         
-            <li><a class="toctree-l4" href="#start-your-car">Start your car.</a></li>
+            <li><a class="toctree-l4" href="#start-your-car">Start your car</a></li>
         
             <li><a class="toctree-l4" href="#driving-with-web-controller">Driving with Web Controller</a></li>
         
-        </ul>
-    
-
-    <li class="toctree-l3"><a href="#driving-with-physical-joystick-controller">Driving with Physical Joystick Controller</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l4" href="#setup-bluetooth-and-pair-joystick">Setup Bluetooth and pair joystick</a></li>
-        
-            <li><a class="toctree-l4" href="#start-car">Start car</a></li>
-        
-            <li><a class="toctree-l4" href="#joystick-controls">Joystick Controls</a></li>
-        
-            <li><a class="toctree-l4" href="#next-lets-train-an-autopilot_1">Next let's train an autopilot.</a></li>
+            <li><a class="toctree-l4" href="#driving-with-physical-joystick-controller">Driving with Physical Joystick Controller</a></li>
         
         </ul>
     
@@ -200,6 +187,11 @@
     <a class="" href="../../faq/">FAQ</a>
 	    </li>
           
+            <li class="toctree-l1">
+		
+    <a class="" href="../../legacy/">Legacy</a>
+	    </li>
+          
         </ul>
       </div>
       &nbsp;
@@ -239,14 +231,14 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="drive-your-car">Drive your car.</h1>
+                <h1 id="drive-your-car">Drive your car</h1>
 <p>After you've <a href="/guide/calibrate">calibrated</a> your car you can start driving it. </p>
 <p>If you are not already, please <a href="/guide/robot_sbc/setup_raspberry_pi/#step-5-connecting-to-the-pi">ssh into your vehicle</a>.</p>
-<h3 id="start-your-car">Start your car.</h3>
+<h2 id="start-your-car">Start your car</h2>
 <blockquote>
-<p><strong><em> Put your car in a safe place where the wheels are off the ground </em></strong>. This
-is the step were the car can take off. </p>
+<p><strong><em> Put your car in a safe place where the wheels are off the ground </em></strong>.</p>
 </blockquote>
+<p>This is the step were the car can take off. </p>
 <p>Open your car's folder and start your car. </p>
 <pre><code>cd ~/mycar
 python manage.py drive
@@ -254,7 +246,7 @@ python manage.py drive
 
 <p>This script will start the drive loop in your car which includes a part that 
 is a web server for you to control your car. You can now control your car
-from a web browser at the URL: <code>&lt;your car's IP's address&gt;:8887</code></p>
+from a web browser at the URL: <code>&lt;your car's hostname.local&gt;:8887</code></p>
 <p><img alt="drive UI" src="../../assets/drive_UI.png" /></p>
 <h2 id="driving-with-web-controller">Driving with Web Controller</h2>
 <p>On your phone you can now press start to set your phones current tilt to be
@@ -277,19 +269,19 @@ races if you have a pilot that will steer but doesn't control throttle. </li>
 <li><code>l</code> : turn right </li>
 </ul>
 <hr />
-<h3 id="next-lets-train-an-autopilot">Next let's <a href="/guide/train_autopilot/">train an autopilot</a>.</h3>
+<p>If you don't have a joystick then you can skip to next section - <a href="/guide/train_autopilot/">train an autopilot</a>.</p>
 <hr />
-<h1 id="driving-with-physical-joystick-controller">Driving with Physical Joystick Controller</h1>
+<h2 id="driving-with-physical-joystick-controller">Driving with Physical Joystick Controller</h2>
 <p>You may find that it helps to use a physical joystick device to control your vehicle.</p>
 <h3 id="setup-bluetooth-and-pair-joystick">Setup Bluetooth and pair joystick</h3>
 <p>Check the <a href="/parts/controllers/#physical-joystick-controller">Controllers</a> section to read about setting up the bluetooth connection.</p>
 <h3 id="start-car">Start car</h3>
-<pre><code>cd ~/mycar
+<pre><code class="bash">cd ~/mycar
 python manage.py drive --js
 </code></pre>
 
 <p>Optionally, if you want joystick use to be sticky and don't want to add the --js each time, modify your <strong>myconfig.py</strong> so that <strong>USE_JOYSTICK_AS_DEFAULT = True</strong></p>
-<pre><code>nano myconfig.py
+<pre><code class="bash">nano myconfig.py
 </code></pre>
 
 <h3 id="joystick-controls">Joystick Controls</h3>
@@ -313,7 +305,7 @@ python manage.py drive --js
 <li>Start - Toggle constant throttle. Sets to max throttle (modified by X and Triangle).</li>
 </ul>
 <hr />
-<h3 id="next-lets-train-an-autopilot_1">Next let's <a href="/guide/train_autopilot/">train an autopilot</a>.</h3>
+<h3 id="next-lets-train-an-autopilot">Next let's <a href="/guide/train_autopilot/">train an autopilot</a>.</h3>
               
             </div>
           </div>

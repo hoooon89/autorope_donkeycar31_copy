@@ -114,6 +114,8 @@
         
             <li><a class="toctree-l4" href="#anatomy-of-a-part">Anatomy of a Part</a></li>
         
+            <li><a class="toctree-l4" href="#threaded-parts">Threaded Parts</a></li>
+        
         </ul>
     
 
@@ -183,6 +185,11 @@
     <a class="" href="../../faq/">FAQ</a>
 	    </li>
           
+            <li class="toctree-l1">
+		
+    <a class="" href="../../legacy/">Legacy</a>
+	    </li>
+          
         </ul>
       </div>
       &nbsp;
@@ -223,13 +230,15 @@
             <div class="section">
               
                 <h1 id="what-is-a-part">What is a Part</h1>
-<p>A part Python class that wraps a functional component of a vehicle.
-These include:
-* Sensors - Cameras, Lidar, Odometers, GPS ...
-* Actuators - Motor Controllers
-* Pilots - Lane Detectors, Behavioral Cloning models, ...
-* Controllers - Web based or Bluetooth.
-* Stores - Tub, or a way to save data.</p>
+<p>A part Python class that wraps a functional component of a vehicle.</p>
+<p>These include:</p>
+<ul>
+<li>Sensors - Cameras, Lidar, Odometers, GPS ...</li>
+<li>Actuators - Motor Controllers</li>
+<li>Pilots - Lane Detectors, Behavioral Cloning models, ...</li>
+<li>Controllers - Web based or Bluetooth.</li>
+<li>Stores - Tub, or a way to save data.</li>
+</ul>
 <p>Here is an example how to use the PiCamera part to publish an image in the
 'cam/img' channel on every drive loop.</p>
 <pre><code class="python">V = dk.Vehicle()
@@ -257,34 +266,34 @@ class RandPercent:
 <p>Now to add this to a vehicle:</p>
 <pre><code class="python">V = dk.Vehicle()
 
-#initialize the channel value
+# initialize the channel value
 V.mem['const'] = 4
 
-#add the part to read and write to the same channel.
+# add the part to read and write to the same channel.
 V.add(RandPercent, inputs=['const'], outputs=['const'])
 
 V.start(max_loops=5)
 </code></pre>
 
-<h3 id="threaded-parts">Threaded Parts</h3>
+<h2 id="threaded-parts">Threaded Parts</h2>
 <p>For a vehicle to perform well the drive loop must execute 10-30 times per
 second so slow parts should be threaded to avoid holding up the drive loop.</p>
 <p>A threaded part needs to define the function that runs in the separate thread
 and the function to call that will return the most recent values quickly.</p>
-<p>Here's an example how to make the RandPercent part threaded if the run
-function too a second to complete.</p>
+<p>Here's an example how to make the <code>RandPercent</code> part threaded if the run
+function takes a second to complete.</p>
 <pre><code class="python">import random
 import time
 
 class RandPercent:
-    self.in = 0.
-    self.out = 0.
+    self.in = 0.0
+    self.out = 0.0
     def run(self, x):
         return x * random.random()
         time.sleep(1)
 
     def update(self):
-        #the funtion run in it's own thread
+        # the function run in it's own thread
         while True:
             self.out = self.run(self.in)
 
